@@ -2,7 +2,7 @@
 
 > **Đề tài:** Xây dựng nền tảng chia sẻ hình ảnh và giao lưu cho người nuôi thú cưng.
 
-<img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/5ef0a088-c767-4ec6-8863-ac07777d6bfe" />
+<img width="600" height="600" alt="PawsConnect (1)" src="https://github.com/user-attachments/assets/3c4ac1ed-637a-4718-b349-45345fd220e5" />
 
 ## 1. Giới thiệu dự án
 Trong bối cảnh các mạng xã hội hiện nay như Instagram hay Facebook phục vụ đa dạng nội dung, **PawsConnect** được xây dựng nhằm tạo ra một không gian chuyên biệt dành riêng cho cộng đồng yêu thú cưng.
