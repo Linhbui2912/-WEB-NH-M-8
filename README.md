@@ -2,12 +2,12 @@
 
 > **Đề tài:** Xây dựng nền tảng chia sẻ hình ảnh và giao lưu cho người nuôi thú cưng.
 
-<img width="600" height="600" alt="PawsConnect (1)" src="https://github.com/user-attachments/assets/3c4ac1ed-637a-4718-b349-45345fd220e5" />
+<img width="600" height="600" alt="PawsConnect (1)" src="https://github.com/user-attachments/assets/3c4ac1ed-637a-4718-b349-45345fd220e5" /> <br>
 
-*Bùi Mai Yến Linh - 31231023859 - Github: linhbui2912
-*Trần Thị Thanh Phương - 31231027815 - Github: phuongtran31231027815
-*Huỳnh Thị Thúy Phương - 31231021257 - Github: PhuongHuynh23
-*Phạm Ngọc Hồng Như - 31231022752 - Github: nhupham31231022752
+*Bùi Mai Yến Linh - 31231023859 - Github: linhbui2912 <br>
+*Trần Thị Thanh Phương - 31231027815 - Github: phuongtran31231027815 <br>
+*Huỳnh Thị Thúy Phương - 31231021257 - Github: PhuongHuynh23 <br>
+*Phạm Ngọc Hồng Như - 31231022752 - Github: nhupham31231022752 <br>
 
 ## 1. Giới thiệu dự án
 Trong bối cảnh các mạng xã hội hiện nay như Instagram hay Facebook phục vụ đa dạng nội dung, **PawsConnect** được xây dựng nhằm tạo ra một không gian chuyên biệt dành riêng cho cộng đồng yêu thú cưng.
