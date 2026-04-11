@@ -96,73 +96,82 @@
                 </div>
 
                 <!-- Body -->
-                <div class="modal-body d-flex">
+                <div class="modal-body d-flex flex-wrap">
                   <!-- LEFT: Ảnh -->
-                  <div class="w-50 d-flex align-items-center border-end">
+                  <div
+                    class="w-50 col-12 col-md-6 d-flex align-items-center border-end"
+                  >
                     <img
                       src="../assets/SOURCE IMAGES/meomeodemo.jpg"
-                      style="width: 100%; height: 100%; object-fit: cover"
+                      style="width: 100%; height: 100%; object-fit:cover"
                     />
                   </div>
 
                   <!-- RIGHT: Settings -->
-                  <div class="w-50 ps-3">
+                  <div class="w-50 col-12 col-md-6 ps-3">
                     <!-- User -->
-                    <div class="account-item" style="display: block">
-                      <div
-                        class="left"
-                        style="display: flex; align-items: center; gap: 20px"
-                      >
-                        <img
-                          src="../assets/SOURCE IMAGES/meo_avatar.jpg"
-                          style="
-                            width: 45px;
-                            height: 45px;
-                            border-radius: 50%;
-                            object-fit: cover;
-                          "
-                        />
-                        <div style="display: flex; flex-direction: column">
-                          <span style="font-weight: 600">mieu123</span>
-                          <span style="font-size: 13px; color: #8e8e8e">
-                            Threads · Riêng tư
-                          </span>
+                    <div class="container account-item">
+                      <div class="row">
+                        <div
+                          class="left col-9"
+                          style="display: flex; align-items: center; gap: 20px"
+                        >
+                          <img
+                            src="../assets/SOURCE IMAGES/meo_avatar.jpg"
+                            style="
+                              width: 45px;
+                              height: 45px;
+                              border-radius: 50%;
+                              object-fit: cover;
+                            "
+                          />
+                          <div style="display: flex; flex-direction: column">
+                            <span style="font-weight: 600">mieu123</span>
+                            <span style="font-size: 13px; color: #8e8e8e">
+                              Threads · Riêng tư
+                            </span>
+                          </div>
                         </div>
-                        <div class="form-check form-switch mb-2">
-                          <input class="form-check-input" type="checkbox" />
+                        <div class="col-3 form-check form-switch ps-0">
+                          <input class="form-check-input ms-1" type="checkbox" />
                         </div>
                       </div>
-                      <div
-                        class="left"
-                        style="
-                          display: flex;
-                          align-items: center;
-                          gap: 20px;
-                          margin-top: 10px;
-                        "
-                      >
-                        <img
-                          src="../assets/SOURCE IMAGES/meo_avatar.jpg"
+                      <div class="row">
+                        <div
+                          class="left col-9"
                           style="
-                            width: 45px;
-                            height: 45px;
-                            border-radius: 50%;
-                            object-fit: cover;
+                            display: flex;
+                            align-items: center;
+                            gap: 20px;
+                            margin-top: 10px;
                           "
-                        />
-                        <div style="display: flex; flex-direction: column">
-                          <span style="font-weight: 600">mieumieu</span>
-                          <span style="font-size: 13px; color: #8e8e8e">
-                            Facebook · Riêng tư
-                          </span>
+                        >
+                          <img
+                            src="../assets/SOURCE IMAGES/meo_avatar.jpg"
+                            style="
+                              width: 45px;
+                              height: 45px;
+                              border-radius: 50%;
+                              object-fit: cover;
+                            "
+                          />
+                          <div style="display: flex; flex-direction: column">
+                            <span style="font-weight: 600">mieumieu</span>
+                            <span style="font-size: 13px; color: #8e8e8e">
+                              Facebook · Riêng tư
+                            </span>
+                          </div>                          
                         </div>
-                        <div class="form-check form-switch mb-2">
-                          <input class="form-check-input" type="checkbox" />
-                        </div>
+                        <div class="col-3 form-check form-switch ps-0"">
+                            <input
+                              class="form-check-input ms-1"
+                              type="checkbox"
+                            />
+                          </div>
                       </div>
                     </div>
                     <!-- Settings -->
-                    <div class="settings">
+                    <div class="container settings">
                       <style>
                         .desc {
                           display: block;
@@ -179,77 +188,117 @@
                         }
                       </style>
                       <div
-                        class="d-flex justify-content-between align-items-center p-2 ps-0"
+                        class="row ps-0"
                       >
+                      <div class ="d-flex justify-content-between align-items-center">
                         <span style="font-weight: 600">Cài đặt nâng cao</span>
                         <i class="bi bi-chevron-down"></i>
+                      </div>                        
                       </div>
                       <!-- Item 1 -->
-                      <div class="mb-3">
-                        <div
-                          class="form-check form-switch d-flex justify-content-between align-items-center ps-0"
-                        >
-                          <label class="form-check-label">
+                      <div class="row mb-3">
+                        <!-- Cột nội dung -->
+                        <div class="col col-9">
+                          <label class="row form-check-label d-block ps-0">
                             Ẩn lượt thích và lượt xem trên bài viết này
                           </label>
-                          <input class="form-check-input" type="checkbox" />
                         </div>
-                        <span class="desc">
-                          Số lượt thích và lượt xem trên bài viết của bạn sẽ
-                          không hiển thị cho người khác. Bạn vẫn có thể xem tổng
-                          số lượt thích trong phần thống kê chi tiết.
-                        </span>
-                      </div>
-
-                      <!-- Item 2 -->
-                      <div class="mb-3">
+                        <!-- Cột nút gạt -->
                         <div
-                          class="form-check form-switch d-flex justify-content-between align-items-center ps-0"
+                          class="col-3 d-flex align-items-start justify-content-end"
                         >
-                          <label class="form-check-label">
+                          <div class="form-check form-switch m-0">
+                            <input class="form-check-input" type="checkbox" />
+                          </div>
+                        </div>
+                        <!-- Cột nội dung mô tả -->
+                        <div class="row">
+                          <div class="col-11 p-0">
+                            <span class="desc d-block p-0">
+                              Số lượt thích và lượt xem trên bài viết của bạn sẽ
+                              không hiển thị cho người khác. Bạn vẫn có thể xem
+                              tổng số lượt thích trong phần thống kê chi tiết.
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Item 2 -->
+                      <div class="row mb-3">
+                        <div class="col col-9">
+                          <label class="row form-check-label d-block ps-0">
                             Tắt tính năng bình luận
                           </label>
-                          <input class="form-check-input" type="checkbox" />
                         </div>
-                        <span class="desc">
-                          Người khác sẽ không thể bình luận vào bài viết này.
-                          Bạn có thể bật lại bình luận bất kỳ lúc nào sau khi
-                          đăng.
-                        </span>
-                      </div>
-
-                      <!-- Item 3 -->
-                      <div class="mb-3">
+                        <!-- Cột nút gạt -->
                         <div
-                          class="form-check form-switch d-flex justify-content-between align-items-center ps-0"
+                          class="col col-3 d-flex align-items-start justify-content-end"
                         >
-                          <label class="form-check-label">
+                          <div class="form-check form-switch m-0">
+                            <input class="form-check-input" type="checkbox" />
+                          </div>
+                        </div>
+                        <!-- Cột nội dung mô tả -->
+                        <div class="row">
+                          <div class="col col-11 p-0">
+                            <span class="desc d-block p-0">
+                              Người khác sẽ không thể bình luận vào bài viết
+                              này. Bạn có thể bật lại bình luận bất kỳ lúc nào
+                              sau khi đăng.
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Item 3 -->
+                      <div class="row mb-3">
+                        <div class="col col-9">
+                          <label class="row form-check-label d-block ps-0">
                             Tự động chia sẻ lên Threads
                           </label>
-                          <input class="form-check-input" type="checkbox" />
                         </div>
-                        <span class="desc">
-                          Bài viết của bạn sẽ được chia sẻ đồng thời lên
-                          Threads. Nội dung và hình ảnh sẽ được giữ nguyên khi
-                          đăng.
-                        </span>
-                      </div>
-
-                      <!-- Item 4 -->
-                      <div class="mb-3">
+                        <!-- Cột nút gạt -->
                         <div
-                          class="form-check form-switch d-flex justify-content-between align-items-center ps-0"
+                          class="col col-3 d-flex align-items-start justify-content-end"
                         >
-                          <label class="form-check-label">
+                          <div class="form-check form-switch m-0">
+                            <input class="form-check-input" type="checkbox" />
+                          </div>
+                        </div>
+                        <!-- Cột nội dung mô tả -->
+                        <div class="row">
+                          <div class="col col-11 p-0">
+                            <span class="desc d-block p-0">
+                              Bài viết của bạn sẽ được chia sẻ đồng thời lên
+                              Threads. Nội dung và hình ảnh sẽ được giữ nguyên
+                              khi đăng.
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Item 4 -->
+                      <div class="row mb-3">
+                        <div class="col col-9">
+                          <label class="row form-check-label d-block ps-0">
                             Tự động chia sẻ lên Facebook
                           </label>
-                          <input class="form-check-input" type="checkbox" />
                         </div>
-                        <span class="desc">
-                          Bài viết sẽ được đồng bộ lên tài khoản Facebook đã
-                          liên kết. Bạn có thể quản lý quyền riêng tư trong cài
-                          đặt Facebook.
-                        </span>
+                        <!-- Cột nút gạt -->
+                        <div
+                          class="col col-3 d-flex align-items-start justify-content-end"
+                        >
+                          <div class="form-check form-switch m-0">
+                            <input class="form-check-input" type="checkbox" />
+                          </div>
+                        </div>
+                        <!-- Cột nội dung mô tả -->
+                        <div class="row">
+                          <div class="col col-11 p-0">
+                            <span class="desc d-block p-0">
+                              Bài viết sẽ được đồng bộ lên tài khoản Facebook đã
+                              liên kết. Bạn có thể quản lý quyền riêng tư trong
+                              cài đặt Facebook.
+                            </span>
+                          </div>                          
+                        </div>
                       </div>
                     </div>
                   </div>
