@@ -1,38 +1,95 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PawConnect - Profile</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PawConnect - Profile</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/profile.css" />
 </head>
 <body>
-  <div class="container-fluid px-0">
-    <div class="row g-0">
-    <aside class="left-sidebar col-2 col-md-1">
-      <a class="sidebar-logo mb-4" href="../index.html" data-bs-toggle="tooltip" data-bs-title="Trang chủ PawConnect">
-        <img src="../assets/images/logo-pawconnect.png" alt="PawConnect Logo">
-      </a>
-      <nav class="sidebar-nav">
-        <a href="../index.html" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Home"><img src="../assets/images/icon-home.png" alt="Home"></a>
-        <a href="search.html" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Search"><img src="../assets/images/icon-search.png" alt="Search"></a>
-        <a href="discover.html" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Discover"><img src="../assets/images/icon-discover.png" alt="Discover"></a>
-        <a href="create-post.html" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Create New Post"><img src="../assets/images/icon-create.png" alt="Create"></a>
-        <a href="profile.html" class="nav-icon active" data-bs-toggle="tooltip" data-bs-title="User Account"><img src="../assets/images/icon-account.png" alt="Account"></a>
-      </nav>
-      <a href="settings.html" class="nav-icon settings-icon" data-bs-toggle="tooltip" data-bs-title="Settings"><img src="../assets/images/icon-settings.png" alt="Settings"></a>
-    </aside>
+    <div class="profile-page container-fluid px-0">
+        <div class="row g-0 min-vh-100">
 
-    <section class="placeholder-page col">
-      <div class="placeholder-box">
-        <h1 class="h3 mb-2">User Profile</h1>
-        <p class="text-secondary mb-0">Trang Profile layout skeleton đã sẵn sàng để nhóm bạn tích hợp chức năng.</p>
-      </div>
-    </section>
+            <aside class="left-sidebar col-2 col-md-1">
+                <a class="sidebar-logo mb-4" href="../index.html" data-bs-toggle="tooltip" data-bs-title="Trang chủ PawConnect">
+                    <img src="../assets/SOURCE%20IMAGES/PawsConnect.png" alt="PawConnect Logo" />
+                </a>
+
+                <nav class="sidebar-nav">
+                    <a href="../index.html" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Home"><img src="../assets/SOURCE%20IMAGES/home_5973558.png" alt="Home" /></a>
+                    <a href="search.html" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Search"><img src="../assets/SOURCE%20IMAGES/search.png" alt="Search" /></a>
+                    <a href="discover.html" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Discover"><img src="../assets/SOURCE%20IMAGES/discovery_12028921.png" alt="Discover" /></a>
+                    <a href="create-post.html" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Create New Post"><img src="../assets/SOURCE%20IMAGES/add.png" alt="Create" /></a>
+                    <a href="profile.html" class="nav-icon active" data-bs-toggle="tooltip" data-bs-title="User Account"><img src="../assets/SOURCE%20IMAGES/user.png" alt="Account" /></a>
+                </nav>
+
+                <a href="settings.html" class="nav-icon settings-icon" data-bs-toggle="tooltip" data-bs-title="Settings">
+                    <img src="../assets/SOURCE%20IMAGES/setting.png" alt="Settings" />
+                </a>
+            </aside>
+
+            <main class="profile-main flex-grow-1">
+                <div class="container py-4">
+                    <section class="row align-items-center justify-content-center g-4 mb-4">
+                        <div class="col-12 col-lg-3 text-center">
+                            <div class="profile-avatar-box mx-auto">
+                                <img src="https://sf-static.upanhlaylink.com/img/image_20260410d17ce269d3ac5aaf56ee4fbe86c44bf8.jpg"
+                                     alt="User Avatar"
+                                     class="profile-avatar" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-7">
+                            <div class="profile-info text-center text-lg-start">
+                                <h1 class="profile-username mb-1">Dabidabidu2017</h1>
+                                <p class="profile-name mb-3">Dabidabidu</p>
+
+                                <div class="row g-2 mb-3 justify-content-center justify-content-lg-start profile-stats">
+                                    <div class="col-auto"><strong>10</strong> bài viết</div>
+                                    <div class="col-auto"><strong>1.000</strong> bạn theo dõi</div>
+                                    <div class="col-auto">Theo dõi <strong>200</strong> bạn</div>
+                                </div>
+
+                                <p class="profile-bio mb-0">
+                                    Dabidabidu đây <br />
+                                    Ngủ là chính, ăn là phụ, đáng yêu là nghề <br />
+                                    Follow tui đi rồi biết ai mới là boss thật sự
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="row g-3 justify-content-center mb-4 profile-actions">
+                        <div class="col-12 col-md-6 col-lg-5">
+                            <button class="btn btn-follow w-100">Theo dõi</button>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-5">
+                            <button class="btn btn-pet w-100">Vuốt ve</button>
+                        </div>
+                    </section>
+
+                    <section class="row g-0 profile-posts">
+                        <div class="col-6 col-md-4 col-lg-3"><div class="post-item"><img src="https://sf-static.upanhlaylink.com/img/image_20260410ce35c13d465ee2d24f398c16c10813a8.jpg" alt="Post 1" /></div></div>
+                        <div class="col-6 col-md-4 col-lg-3"><div class="post-item"><img src="https://sf-static.upanhlaylink.com/img/image_20260410d235c375cc104272213823e60bd886d8.jpg" alt="Post 2" /></div></div>
+                        <div class="col-6 col-md-4 col-lg-3"><div class="post-item"><img src="https://sf-static.upanhlaylink.com/img/image_20260410129bb7d2e9bb775bb3e69927a4b77462.jpg" alt="Post 3" /></div></div>
+                        <div class="col-6 col-md-4 col-lg-3"><div class="post-item"><img src="https://sf-static.upanhlaylink.com/img/image_202604100954f693677d966a693fa86a8e2ad56b.jpg" alt="Post 4" /></div></div>
+                        <div class="col-6 col-md-4 col-lg-3"><div class="post-item"><img src="https://sf-static.upanhlaylink.com/img/image_2026041096dd03d408d962ad90d992890fdfe785.jpg" alt="Post 5" /></div></div>
+                        <div class="col-6 col-md-4 col-lg-3"><div class="post-item"><img src="https://sf-static.upanhlaylink.com/img/image_20260410cea48a5a0561a440984c2678074507a8.jpg" alt="Post 6" /></div></div>
+                        <div class="col-6 col-md-4 col-lg-3"><div class="post-item"><img src="https://sf-static.upanhlaylink.com/img/image_2026041029f174f27e6265e5e4b9f5c7b0709a39.jpg" alt="Post 7" /></div></div>
+                        <div class="col-6 col-md-4 col-lg-3"><div class="post-item"><img src="https://sf-static.upanhlaylink.com/img/image_20260410975eab580c286e17dba2f9f1ec77209a.jpg" alt="Post 8" /></div></div>
+                    </section>
+                </div>
+            </main>
+
+        </div>
     </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/main.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
 </body>
 </html>
+
