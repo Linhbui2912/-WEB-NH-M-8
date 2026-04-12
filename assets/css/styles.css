@@ -1,0 +1,299 @@
+:root {
+  --sidebar-width: 92px;
+  --feed-width: 640px;
+  --bg-page: #efefef;
+  --bg-card: #ffffff;
+  --text-main: #232323;
+  --text-soft: #6f6f6f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-main);
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+}
+
+.left-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar-width);
+  background: transparent;
+  border-right: 1px solid #ddd;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  justify-items: center;
+  padding: 1.1rem 0 1.1rem;
+  z-index: 1000;
+}
+
+.sidebar-logo img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  align-self: center;
+}
+
+.nav-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  transition: background-color 0.18s ease;
+}
+
+.nav-icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.nav-icon:hover,
+.nav-icon.active {
+  background: #e4e4e4;
+}
+
+.settings-icon {
+  margin-top: 0.75rem;
+}
+
+.feed-wrapper {
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+  display: flex;
+  justify-content: center;
+  padding: 1.1rem 1rem 2rem;
+}
+
+.feed-column {
+  width: 100%;
+  max-width: var(--feed-width);
+}
+
+.post-card {
+  background: var(--bg-card);
+  border-radius: 10px;
+  padding: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 0.96rem;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.post-time {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  line-height: 1;
+}
+
+.post-more {
+  margin-left: auto;
+  color: #777;
+  padding: 0 0.2rem;
+  border: 0;
+  line-height: 1;
+}
+
+.post-image {
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.post-actions {
+  display: flex;
+  gap: 0.45rem;
+  margin-top: 0.55rem;
+}
+
+.icon-btn {
+  border: 0;
+  background: transparent;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.icon-btn:hover {
+  background: #f1f1f1;
+}
+
+.icon-btn img {
+  width: 21px;
+  height: 21px;
+  object-fit: contain;
+}
+
+.post-caption {
+  margin-top: 0.25rem;
+  font-size: 0.92rem;
+}
+
+.comments-modal {
+  border-radius: 14px;
+}
+
+.comments-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.comments-list li {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid #ececec;
+  font-size: 0.92rem;
+}
+
+.comments-list li:last-child {
+  border-bottom: 0;
+}
+
+.comment-user {
+  font-weight: 600;
+  margin-right: 0.35rem;
+}
+
+.comment-empty {
+  color: var(--text-soft);
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.comment-input-wrap {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+}
+
+.placeholder-page {
+  min-height: 100vh;
+  margin-left: var(--sidebar-width);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-box {
+  width: min(720px, 100%);
+  background: #fff;
+  border-radius: 14px;
+  padding: 2rem;
+  text-align: center;
+}
+
+@media (max-width: 991.98px) {
+  :root {
+    --sidebar-width: 76px;
+  }
+
+  .left-sidebar {
+    padding: 0.9rem 0 0.9rem;
+  }
+
+  .sidebar-logo img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .nav-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-icon img {
+    width: 23px;
+    height: 23px;
+  }
+
+  .feed-wrapper,
+  .placeholder-page {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+}
+
+@media (max-width: 767.98px) {
+  :root {
+    --sidebar-width: 62px;
+  }
+
+  .left-sidebar {
+    padding: 0.7rem 0 0.7rem;
+  }
+
+  .sidebar-nav {
+    gap: 0.65rem;
+  }
+
+  .sidebar-logo img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .nav-icon img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .feed-wrapper,
+  .placeholder-page {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+    padding: 0.8rem 0.55rem 1rem;
+  }
+
+  .post-card {
+    padding: 0.65rem;
+    border-radius: 8px;
+  }
+
+  .post-caption {
+    font-size: 0.89rem;
+  }
+}
