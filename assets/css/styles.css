@@ -297,3 +297,78 @@ body {
     font-size: 0.89rem;
   }
 }
+
+ 
+.explore-item {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1; 
+  position: relative;
+  overflow: hidden;
+  background-color: #fafafa;
+}
+
+.explore-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover !important; 
+  transition: filter 0.2s ease;
+  cursor: pointer;
+}
+
+.explore-img:hover {
+  filter: brightness(0.85); 
+}
+
+.modal-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1060; 
+  color: #000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: opacity 0.2s;
+  pointer-events: auto;
+}
+
+.modal-nav-btn:hover {
+  opacity: 0.8;
+}
+
+.modal-prev {
+  left: -50px;
+}
+
+.modal-next {
+  right: -50px; 
+}
+
+
+.ig-scrollbar::-webkit-scrollbar {
+  width: 0px; 
+  background: transparent;
+}
+.ig-scrollbar:hover::-webkit-scrollbar {
+  width: 6px;
+}
+.ig-scrollbar::-webkit-scrollbar-thumb {
+  background: #dbdbdb; 
+  border-radius: 10px;
+}
+
+.modal-content img {
+  max-width: 100%;
+}
+
