@@ -1,0 +1,190 @@
+:root {
+  --pc-bg: #faf8f5;
+  --pc-sidebar: #fff;
+  --pc-border: #e8e4df;
+  --pc-text: #1a1a1a;
+  --pc-muted: #6b6b6b;
+  --pc-accent: #c45c26;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--pc-bg);
+  color: var(--pc-text);
+}
+
+.left-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem 0.5rem;
+  background: var(--pc-sidebar);
+  border-right: 1px solid var(--pc-border);
+}
+
+.sidebar-logo img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+  flex: 1;
+}
+
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.nav-icon:hover,
+.nav-icon.active {
+  background: #f3efe9;
+}
+
+.nav-icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.settings-icon {
+  margin-top: auto;
+}
+
+.feed-wrapper {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.post-card {
+  background: #fff;
+  border: 1px solid var(--pc-border);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+}
+
+.post-header .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.post-header .username {
+  font-size: 0.95rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.post-time {
+  font-size: 0.75rem;
+  color: var(--pc-muted);
+  margin: 0;
+}
+
+.post-image {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.post-actions {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+}
+
+.icon-btn img {
+  width: 28px;
+  height: 28px;
+}
+
+.post-caption {
+  padding: 0 1rem 1rem;
+  font-size: 0.9rem;
+}
+
+.comments-modal .modal-body {
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.comments-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comments-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.9rem;
+}
+
+.comment-input-wrap {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .left-sidebar {
+    flex-direction: row;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    z-index: 100;
+    border-right: none;
+    border-top: 1px solid var(--pc-border);
+    padding: 0.5rem;
+  }
+
+  .sidebar-logo,
+  .settings-icon {
+    display: none;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+}
