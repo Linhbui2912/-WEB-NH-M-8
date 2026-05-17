@@ -16,5 +16,5 @@ spl_autoload_register(static function (string $class): void {
 
 /** User demo khi chưa có đăng nhập — sau này thay bằng session đăng nhập thật. */
 if (!isset($_SESSION['user_id'])) {
-    $_SESSION['user_id'] = 'U001';
+    $_SESSION['user_id'] = 'U002'; // bob — session demo
 }

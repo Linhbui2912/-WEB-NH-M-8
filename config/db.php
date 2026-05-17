@@ -1,8 +1,8 @@
 <?php
-define('HOST', '26.151.17.5');
-define('DB', 'db_pawsconnect');
-define('USER', 'paws_user');
-define('PASSWORD', '');
+define('HOST', '26.151.17.5'); // tên máy chủ cài đặt MySQL
+define('DB', 'db_pawsconnect'); // Tên CSDL kết nối
+define('USER', 'paws_user'); // Tên người dùng sử dụng CSDL
+define('PASSWORD', ''); // Mật khẩu người dùng sử dụng CSDL
 
 function getDB(): PDO
 {
