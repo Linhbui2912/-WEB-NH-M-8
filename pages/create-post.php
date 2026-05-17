@@ -20,7 +20,7 @@
         <aside class="left-sidebar col-2 col-md-1">
           <a
             class="sidebar-logo mb-4"
-            href="../index.php"
+            href="homepage.php"
             data-bs-toggle="tooltip"
             data-bs-title="Trang chủ PawConnect"
           >
@@ -31,7 +31,7 @@
           </a>
           <nav class="sidebar-nav">
             <a
-              href="../index.php"
+              href="homepage.php"
               class="nav-icon"
               data-bs-toggle="tooltip"
               data-bs-title="Home"
