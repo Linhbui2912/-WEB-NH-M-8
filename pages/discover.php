@@ -1,3 +1,43 @@
+<?php
+// ==========================================
+// PHẦN 1: TRUY VẤN DATABASE MYSQL ĐỘNG (RADMIN VPN)
+// ==========================================
+define("HOST", "26.151.17.5");       
+define("DB", "db_pawsconnect");      
+define("USER", "paws_user");         
+define("PASSWORD", "");              
+
+$errorMsg = "";
+$posts = [];
+
+try {
+    $dsn = "mysql:host=" . HOST . ";dbname=" . DB . ";charset=utf8mb4";
+    $db = new PDO($dsn, USER, PASSWORD);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+   
+    $query = "SELECT BaiDang.*, NguoiDung.tenDangNhap, PhuongTien.duongDan
+              FROM BaiDang 
+              JOIN NguoiDung ON BaiDang.maNguoiDung = NguoiDung.maNguoiDung
+              LEFT JOIN PhuongTien ON BaiDang.maBaiDang = PhuongTien.maBaiDang
+              ORDER BY BaiDang.thoiGianDang DESC";
+              
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    $errorMsg = "Lỗi kết nối Cơ sở dữ liệu: " . $e->getMessage();
+}
+
+
+$localPetImages = [
+    'C1.1.jpg', 'C1.2.jpg', 'C1.3.jpg', 'C1.4.jpg', 'C1.5.jpg', 'C1.6.jpg', 'C1.7.jpg', 'C1.8.jpg',
+    'C2.1.jpg', 'C5.1.jpg', 'C5.2.jpg',
+    'D1.1.jpg', 'D1.2.jpg', 'D2.1.jpg', 'D2.2.jpg', 'D2.3.jpg', 'D2.4.jpg', 'D3.1.jpg', 'D3.2.jpg', 'D3.3.jpg', 'D4.1.jpg', 'D4.2.jpg'
+];
+?>
+
 <!doctype html>
 <html lang="vi">
 <head>
@@ -6,12 +46,99 @@
   <title>PawConnect - Discover</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/styles.css">
+  
+  <style>
+    
+    .left-sidebar {
+        padding-top: 30px !important;
+        border-right: 1px solid #efefef;
+        background: #fff;
+    }
+    .sidebar-logo img {
+        width: 40px !important; 
+        height: auto !important;
+        display: block;
+        margin: 0 auto;
+    }
+    .sidebar-nav .nav-icon img {
+        width: 26px !important;
+        height: 26px !important;
+        display: block;
+        margin: 25px auto !important;
+    }
+    .settings-icon img {
+        width: 26px !important;
+        height: 26px !important;
+        display: block;
+        margin: 40px auto !important;
+    }
+
+    
+    .explore-item {
+        display: block;
+        position: relative;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 4px;
+        margin-bottom: 4px;
+    }
+    .explore-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    
+    .modal-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1070;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        pointer-events: auto; 
+        transition: background 0.2s, transform 0.1s;
+    }
+    .modal-nav-btn:hover { background: rgba(255, 255, 255, 1); transform: translateY(-50%) scale(1.05); }
+    .modal-prev { left: -65px; }
+    .modal-next { right: -65px; }
+    
+    @media (max-width: 1200px) {
+        .modal-prev { left: 15px; }
+        .modal-next { right: 15px; }
+    }
+    .saved-active { fill: currentColor !important; color: #000 !important; }
+  </style>
 </head>
 <body>
   <div class="container-fluid px-0">
     <div class="row g-0">
       
       <aside class="left-sidebar col-2 col-md-1">
+        <aside class="left-sidebar col-2 col-md-1">
+        <a class="sidebar-logo mb-4" href="../index.php">
+            <img src="../assets/icon/PawsConnect.png" alt="PawConnect Logo" />
+        </a>
+        <nav class="sidebar-nav">
+            <a href="../index.php" class="nav-icon"><img src="../assets/icon/home_5973558.png" alt="Home" /></a>
+            <a href="search.php" class="nav-icon"><img src="../assets/icon/search.png" alt="Search" /></a>
+            <a href="discover.php" class="nav-icon active"><img src="../assets/icon/discovery_12028921.png" alt="Discover" /></a>
+            <a href="create-post.php" class="nav-icon"><img src="../assets/icon/add.png" alt="Create" /></a>
+            <a href="profile.php" class="nav-icon"><img src="../assets/icon/user.png" alt="Account" /></a>
+        </nav>
+        <a href="settings.php" class="nav-icon settings-icon">
+            <img src="../assets/icon/setting.png" alt="Settings" />
+        </a>
+      </aside>
         <a class="sidebar-logo mb-4" href="../index.php" data-bs-toggle="tooltip" data-bs-title="Trang chủ PawConnect">
             <img src="../assets/SOURCE%20IMAGES/PawsConnect.png" alt="PawConnect Logo" />
         </a>
@@ -29,22 +156,40 @@
 
       <main class="feed-wrapper col">
         <div class="container-fluid pt-3 px-2" style="max-width: 900px;">
+          
+          <?php if (!empty($errorMsg)) { ?>
+              <div class="alert alert-danger text-center"><?php echo $errorMsg; ?></div>
+          <?php } ?>
+
           <div class="row g-1"> 
-            <div class="col-4"><a href="#" class="explore-item" data-bs-toggle="modal" data-bs-target="#postDetailModal" onclick="openModal('post1')"><img src="../assets/SOURCE%20IMAGES/meo.jpg" class="explore-img" alt="Khám phá"></a></div>
-            <div class="col-4"><a href="#" class="explore-item" data-bs-toggle="modal" data-bs-target="#postDetailModal" onclick="openModal('post2')"><img src="../assets/SOURCE%20IMAGES/meo2.webp" class="explore-img" alt="Khám phá"></a></div>
-            <div class="col-4"><a href="#" class="explore-item" data-bs-toggle="modal" data-bs-target="#postDetailModal" onclick="openModal('post3')"><img src="../assets/SOURCE%20IMAGES/meo3.jpg" class="explore-img" alt="Khám phá"></a></div>
-            <div class="col-4"><a href="#" class="explore-item" data-bs-toggle="modal" data-bs-target="#postDetailModal" onclick="openModal('post4')"><img src="../assets/SOURCE%20IMAGES/meo4.jpg" class="explore-img" alt="Khám phá"></a></div>
-            <div class="col-4"><a href="#" class="explore-item" data-bs-toggle="modal" data-bs-target="#postDetailModal" onclick="openModal('post5')"><img src="../assets/SOURCE%20IMAGES/meo5.jpg" class="explore-img" alt="Khám phá"></a></div>
-            <div class="col-4"><a href="#" class="explore-item" data-bs-toggle="modal" data-bs-target="#postDetailModal" onclick="openModal('post6')"><img src="../assets/SOURCE%20IMAGES/meo6.webp" class="explore-img" alt="Khám phá"></a></div>
-            <div class="col-4"><a href="#" class="explore-item" data-bs-toggle="modal" data-bs-target="#postDetailModal" onclick="openModal('post7')"><img src="../assets/SOURCE%20IMAGES/meo7.webp" class="explore-img" alt="Khám phá"></a></div>
-            <div class="col-4"><a href="#" class="explore-item" data-bs-toggle="modal" data-bs-target="#postDetailModal" onclick="openModal('post8')"><img src="../assets/SOURCE%20IMAGES/meo8.jpeg" class="explore-img" alt="Khám phá"></a></div>
-            <div class="col-4"><a href="#" class="explore-item" data-bs-toggle="modal" data-bs-target="#postDetailModal" onclick="openModal('post9')"><img src="../assets/SOURCE%20IMAGES/meo9.jpg" class="explore-img" alt="Khám phá"></a></div>
-            <div class="col-4"><a href="#" class="explore-item" data-bs-toggle="modal" data-bs-target="#postDetailModal" onclick="openModal('post10')"><img src="../assets/SOURCE%20IMAGES/meo10.jpg" class="explore-img" alt="Khám phá"></a></div>
-            <div class="col-4"><a href="#" class="explore-item" data-bs-toggle="modal" data-bs-target="#postDetailModal" onclick="openModal('post11')"><img src="../assets/SOURCE%20IMAGES/meo11.jpeg" class="explore-img" alt="Khám phá"></a></div>
-            <div class="col-4"><a href="#" class="explore-item" data-bs-toggle="modal" data-bs-target="#postDetailModal" onclick="openModal('post12')"><img src="../assets/SOURCE%20IMAGES/meo12.jpg" class="explore-img" alt="Khám phá"></a></div>
+            
+            <?php 
+            if (!empty($posts)) { 
+                $imgIndex = 0; 
+                foreach ($posts as $post) { 
+                    $chosenImage = $localPetImages[$imgIndex % count($localPetImages)];
+                    $imgIndex++;
+            ?>
+                    <div class="col-4">
+                        <a href="#" class="explore-item" data-bs-toggle="modal" data-bs-target="#postDetailModal" onclick="openModal('post_<?php echo $post['maBaiDang']; ?>')">
+                            <img src="../assets/Posts/<?php echo $chosenImage; ?>" class="explore-img" alt="Khám phá">
+                        </a>
+                    </div>
+            <?php 
+                } 
+            } else { 
+                if (empty($errorMsg)) {
+            ?>
+                    <div class="col-12 text-center text-muted py-5">Không có bài đăng nào trong hệ thống.</div>
+            <?php 
+                }
+            } 
+            ?>
+
           </div>
         </div>
       </main>
+
     </div>
   </div>
 
@@ -73,7 +218,7 @@
               <div class="d-flex align-items-center flex-grow-1">
                 <span id="modalHeaderName" class="fw-bold" style="font-size: 0.9rem;">Tên user</span>
                 <span class="mx-1 text-muted">•</span>
-                <span id="modalFollowBtn" class="fw-bold text-primary" style="font-size: 0.9rem; cursor: pointer;">Theo dõi</span>
+                <span id="modalFollowBtn" class="fw-bold text-primary" style="font-size: 0.9rem; cursor: pointer;" onclick="toggleFollow()">Theo dõi</span>
               </div>
               <button class="btn p-0 border-0 text-dark fw-bold me-3">•••</button>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 0.7rem;"></button>
@@ -85,11 +230,11 @@
             <div class="p-3 border-top">
               <div class="d-flex justify-content-between mb-2">
                  <div class="d-flex gap-3 align-items-center">
-                    <img src="../assets/SOURCE%20IMAGES/footprint.png" style="width: 24px; cursor: pointer;" alt="Like">
-                    <img src="../assets/SOURCE%20IMAGES/message.png" style="width: 24px; cursor: pointer;" alt="Comment">
-                    <img src="../assets/SOURCE%20IMAGES/share.png" style="width: 24px; cursor: pointer;" alt="Share">
+                    <img id="modalLikeIcon" src="../assets/icon/footprint.png" style="width: 24px; cursor: pointer;" alt="Like" onclick="toggleLike()">
+                    <img src="../assets/icon/message.png" style="width: 24px; cursor: pointer;" alt="Comment" onclick="focusCommentInput()">
+                    <img src="../assets/icon/share.png" style="width: 24px; cursor: pointer;" alt="Share">
                  </div>
-                 <svg aria-label="Lưu" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24" style="cursor: pointer;"><title>Lưu</title><polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+                 <svg id="modalSaveIcon" aria-label="Lưu" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24" style="cursor: pointer;" onclick="toggleSave()"><title>Lưu</title><polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon></svg>
               </div>
               
               <p id="modalLikes" class="fw-bold mb-1" style="font-size: 0.9rem;">0 lượt thích</p>
@@ -97,8 +242,8 @@
               
               <div class="d-flex border-top pt-3 align-items-center">
                 <svg aria-label="Biểu tượng cảm xúc" class="me-2" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24" style="cursor: pointer;"><title>Biểu tượng cảm xúc</title><path d="M15.83 10.997a1.167 1.167 0 1 0 1.167 1.167 1.167 1.167 0 0 0-1.167-1.167Zm-6.5 1.167a1.167 1.167 0 1 0-1.166 1.167 1.167 1.167 0 0 0 1.166-1.167Zm5.163 3.24a3.406 3.406 0 0 1-4.982.007 1 1 0 1 0-1.557 1.256 5.397 5.397 0 0 0 8.09 0 1 1 0 0 0-1.55-1.263ZM12 .503a11.5 11.5 0 1 0 11.5 11.5A11.513 11.513 0 0 0 12 .503Zm0 21a9.5 9.5 0 1 1 9.5-9.5 9.51 9.51 0 0 1-9.5 9.5Z"></path></svg>
-                <input type="text" class="form-control border-0 shadow-none px-2" placeholder="Thêm bình luận..." style="font-size: 0.9rem;">
-                <button class="btn text-primary fw-bold px-0 ms-2" type="button" style="font-size: 0.9rem;">Đăng</button>
+                <input id="commentInput" type="text" class="form-control border-0 shadow-none px-2" placeholder="Thêm bình luận..." style="font-size: 0.9rem;">
+                <button class="btn text-primary fw-bold px-0 ms-2" type="button" style="font-size: 0.9rem;" onclick="addComment()">Đăng</button>
               </div>
             </div>
 
@@ -111,22 +256,42 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   
   <script>
+    // ==========================================
+    // PHẦN 3: ĐỔ DỮ LIỆU ĐỘNG TỪ MYSQL VÀO JAVASCRIPT
+    // ==========================================
     const postsDatabase = {
-      'post1': { image: '../assets/SOURCE%20IMAGES/meo.jpg', avatar: '../assets/SOURCE%20IMAGES/meo2.webp', username: 'Meobeo_3123', isFollowing: false, likes: '1.101', timeAgo: '7 NGÀY TRƯỚC', caption: 'Xinh ngoan iu hong các xị✌🏻', captionTime: '1 tuần', comments: [{ avatar: '../assets/SOURCE%20IMAGES/meo3.jpg', username: 'sangnhatkhupho', text: 'leowon riel', time: '3 ngày', likes: '2' }, { avatar: '../assets/SOURCE%20IMAGES/meo4.jpg', username: 'jadedstill', text: 'lsw xinh đẹp quá', time: '3 ngày', likes: '0' }] },
-      'post2': { image: '../assets/SOURCE%20IMAGES/meo2.webp', avatar: '../assets/SOURCE%20IMAGES/meo5.jpg', username: 'hince_official', isFollowing: true, likes: '2.708', timeAgo: '2 THÁNG 4', caption: 'cục cưng của mẹ', captionTime: '1 tuần', comments: [{ avatar: '../assets/SOURCE%20IMAGES/meo6.webp', username: 'lalala', text: 'cưng quá qua cứng😍😍', time: '1 tuần', likes: '1' }] },
-      'post3': { image: '../assets/SOURCE%20IMAGES/meo3.jpg', avatar: '../assets/SOURCE%20IMAGES/meo7.webp', username: 'MiuMiu', isFollowing: false, likes: '890', timeAgo: '2 GIỜ TRƯỚC', caption: 'Ai gọi bé đó có bé đây 🙋‍♀️', captionTime: '2 giờ', comments: [{ avatar: '../assets/SOURCE%20IMAGES/meo8.jpeg', username: 'oidoioi', text: 'Nhìn mặt ngơ ngác cưng ghê.', time: '1 giờ', likes: '5' }] },
-      'post4': { image: '../assets/SOURCE%20IMAGES/meo4.jpg', avatar: '../assets/SOURCE%20IMAGES/meo.jpg', username: 'HoangThuong', isFollowing: true, likes: '5.432', timeAgo: '1 NGÀY TRƯỚC', caption: 'Mới sắm cho zai iu bộ đồ', captionTime: '1 ngày', comments: [{ avatar: '../assets/SOURCE%20IMAGES/meo2.webp', username: 'huhuhhuhu', text: 'cưng quá cho cắn mín', time: '10 giờ', likes: '12' }] },
-      'post5': { image: '../assets/SOURCE%20IMAGES/meo5.jpg', avatar: '../assets/SOURCE%20IMAGES/meo3.jpg', username: 'Bossnununu', isFollowing: false, likes: '3.102', timeAgo: '5 NGÀY TRƯỚC', caption: 'meo pụng sữa💤', captionTime: '5 ngày', comments: [{ avatar: '../assets/SOURCE%20IMAGES/meo4.jpg', username: 'cacon', text: 'Nhìn cái mặt phởn chưa kìa haha', time: '4 ngày', likes: '3' }, { avatar: '../assets/SOURCE%20IMAGES/meo6.webp', username: 'cahong', text: 'Xin vía bé hay ăn chóng lớn ạ.', time: '3 ngày', likes: '0' }] },
-      'post6': { image: '../assets/SOURCE%20IMAGES/meo6.webp', avatar: '../assets/SOURCE%20IMAGES/meo5.jpg', username: 'MeoMeo_Daily', isFollowing: true, likes: '982', timeAgo: '3 GIỜ TRƯỚC', caption: 'Cuối tuần dắt nhau đi dạo công viên thuiii 🌿', captionTime: '3 giờ', comments: [] },
-      'post7': { image: '../assets/SOURCE%20IMAGES/meo7.webp', avatar: '../assets/SOURCE%20IMAGES/meo6.webp', username: 'Patengon', isFollowing: false, likes: '4.210', timeAgo: '2 TUẦN TRƯỚC', caption: 'Hơn hai mươi tuổi đầu họ nhìn vào anh ai cũng ưng con mắt', captionTime: '2 tuần', comments: [{ avatar: '../assets/SOURCE%20IMAGES/meo8.jpeg', username: 'imgay', text: 'nhìn mặt cháu không được sáng dạ cho lắm', time: '1 tuần', likes: '8' }] },
-      'post8': { image: '../assets/SOURCE%20IMAGES/meo8.jpeg', avatar: '../assets/SOURCE%20IMAGES/meo9.jpg', username: 'Memoemo', isFollowing: true, likes: '1.560', timeAgo: '4 NGÀY TRƯỚC', caption: '3s thôi tau sẽ cho nổ tung tất cả', captionTime: '4 ngày', comments: [{ avatar: '../assets/SOURCE%20IMAGES/meo10.jpg', username: 'jihghgdy', text: 'vjp', time: '2 ngày', likes: '1' }] },
-      'post9': { image: '../assets/SOURCE%20IMAGES/meo9.jpg', avatar: '../assets/SOURCE%20IMAGES/meo10.jpg', username: 'Camngot', isFollowing: false, likes: '2.340', timeAgo: '1 THÁNG TRƯỚC', caption: 'lỡ quá chén một hôm', captionTime: '4 tuần', comments: [] },
-      'post10': { image: '../assets/SOURCE%20IMAGES/meo10.jpg', avatar: '../assets/SOURCE%20IMAGES/meo12.jpg', username: 'Munbeo', isFollowing: true, likes: '6.780', timeAgo: '3 NGÀY TRƯỚC', caption: 'j cơ bạng nói j cơ', captionTime: '3 ngày', comments: [{ avatar: '../assets/SOURCE%20IMAGES/meo.jpg', username: 'mumumu', text: 'có dám nói gì đâu', time: '1 ngày', likes: '45' }] },
-      'post11': { image: '../assets/SOURCE%20IMAGES/meo11.jpeg', avatar: '../assets/SOURCE%20IMAGES/meo2.webp', username: 'BanhBao', isFollowing: false, likes: '8.900', timeAgo: '6 GIỜ TRƯỚC', caption: 'tất cả im lặng, ai gây thì phát biểu', captionTime: '6 giờ', comments: [{ avatar: '../assets/SOURCE%20IMAGES/meo3.jpg', username: 'hgygyg', text: 'Ninja rùa nhập à =)))', time: '5 giờ', likes: '11' }] },
-      'post12': { image: '../assets/SOURCE%20IMAGES/meo12.jpg', avatar: '../assets/SOURCE%20IMAGES/meo3.jpg', username: 'VangAnh', isFollowing: true, likes: '12.400', timeAgo: '1 NGÀY TRƯỚC', caption: 'góc nghiêng thần thánh', captionTime: '1 ngày', comments: [{ avatar: '../assets/SOURCE%20IMAGES/meo4.jpg', username: 'Hothuhu', text: 'em bán khóa niềng miễn phí cho mèo 091864735 sdt ib zalo', time: '20 giờ', likes: '2' }, { avatar: '../assets/SOURCE%20IMAGES/meo5.jpg', username: 'Shopet', text: 'check ib mình chưa nhắn', time: '10 giờ', likes: '0' }] }
+      <?php 
+      if (!empty($posts)) {
+          $imgIndex = 0;
+          foreach ($posts as $post) {
+              $chosenImage = $localPetImages[$imgIndex % count($localPetImages)];
+              $imgIndex++;
+              
+              $captionCleaned = addslashes($post['noiDung']);
+              $usernameCleaned = htmlspecialchars($post['tenDangNhap']);
+              $formattedDate = date("d/m/Y", strtotime($post['thoiGianDang']));
+              $randomLikes = rand(50, 1200);
+              
+              echo "'post_" . $post['maBaiDang'] . "': { \n";
+              echo "  image: '../assets/Posts/" . $chosenImage . "',\n";
+              echo "  avatar: '../assets/Posts/C1.1.jpg',\n"; 
+              echo "  username: '" . $usernameCleaned . "',\n";
+              echo "  isFollowing: false,\n";
+              echo "  isLiked: false,\n";
+              echo "  isSaved: false,\n";
+              echo "  likesCount: " . $randomLikes . ",\n"; 
+              echo "  timeAgo: '" . $formattedDate . "',\n";
+              echo "  caption: '" . $captionCleaned . "',\n";
+              echo "  captionTime: '1 ngày',\n";
+              echo "  comments: [\n";
+              echo "    { avatar: '../assets/Posts/C1.3.jpg', username: 'paws_member', text: 'Nhìn bé cưng xỉu up xỉu down luôn á! ❤️', time: '5 giờ' }\n";
+              echo "  ]\n";
+              echo "},\n";
+          }
+      }
+      ?>
     };
 
-    // Hệ thống Tracking bài viết hiện tại
     const postKeys = Object.keys(postsDatabase);
     let currentPostId = null;
 
@@ -141,7 +306,7 @@
       if (currentIndex < postKeys.length - 1) {
         openModal(postKeys[currentIndex + 1]);
       } else {
-        openModal(postKeys[0]); // Chạm đáy thì vòng lại bài đầu
+        openModal(postKeys[0]);
       }
     }
 
@@ -151,21 +316,21 @@
       if (currentIndex > 0) {
         openModal(postKeys[currentIndex - 1]);
       } else {
-        openModal(postKeys[postKeys.length - 1]); // Chạm đỉnh thì vòng lại bài cuối
+        openModal(postKeys[postKeys.length - 1]);
       }
     }
 
-    // Bắt sự kiện bàn phím < và >
+    // SỬA LỖI ĐIỀU HƯỚNG BẰNG CẢ NÚT PHÍM MŨI TÊN VÀ NÚT SỰ KIỆN < >
     document.addEventListener('keydown', function(event) {
-      const modal = document.getElementById('postDetailModal');
-      // Chỉ chạy phím khi Modal đang được hiển thị
-      if (modal.classList.contains('show')) {
-        if (event.key === 'ArrowRight') nextPost();
-        if (event.key === 'ArrowLeft') prevPost();
+      if (currentPostId) {
+        if (event.key === 'ArrowRight' || event.key === '>') nextPost();
+        if (event.key === 'ArrowLeft' || event.key === '<') prevPost();
       }
     });
 
-    // Hàm render dữ liệu
+    // ==========================================
+    // PHẦN 4: CÁC HÀM XỬ LÝ TƯƠNG TÁC ĐỘNG (INTERACTIVE)
+    // ==========================================
     function updateModalData(postId) {
       const data = postsDatabase[postId];
       if (!data) return; 
@@ -173,7 +338,7 @@
       document.getElementById('modalMainImg').src = data.image;
       document.getElementById('modalHeaderAvatar').src = data.avatar;
       document.getElementById('modalHeaderName').innerText = data.username;
-      document.getElementById('modalLikes').innerText = data.likes + ' lượt thích';
+      document.getElementById('modalLikes').innerText = data.likesCount + ' lượt thích';
       document.getElementById('modalTimeAgo').innerText = data.timeAgo;
       
       const followBtn = document.getElementById('modalFollowBtn');
@@ -183,6 +348,20 @@
       } else {
           followBtn.innerText = 'Theo dõi';
           followBtn.classList.replace('text-dark', 'text-primary');
+      }
+
+      const likeIcon = document.getElementById('modalLikeIcon');
+      if(data.isLiked) {
+          likeIcon.src = '../assets/icon/pawheart.png'; 
+      } else {
+          likeIcon.src = '../assets/icon/footprint.png'; 
+      }
+
+      const saveIcon = document.getElementById('modalSaveIcon');
+      if(data.isSaved) {
+          saveIcon.classList.add('saved-active');
+      } else {
+          saveIcon.classList.remove('saved-active');
       }
 
       let commentsHTML = `
@@ -211,16 +390,65 @@
                     </div>
                   </div>
                 </div>
-                <div class="mt-2 text-muted">
-                    <svg aria-label="Thích" fill="currentColor" height="12" role="img" viewBox="0 0 24 24" width="12" style="cursor:pointer;"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.174 2.369 1.174 3.216 0a4.21 4.21 0 0 1 3.693-1.941z"></path></svg>
-                </div>
               </div>
             `;
           });
       }
       document.getElementById('modalCommentsContainer').innerHTML = commentsHTML;
     }
-  </script>
 
+    function toggleFollow() {
+        if (!currentPostId) return;
+        const data = postsDatabase[currentPostId];
+        data.isFollowing = !data.isFollowing;
+        updateModalData(currentPostId);
+    }
+
+    function toggleLike() {
+        if (!currentPostId) return;
+        const data = postsDatabase[currentPostId];
+        data.isLiked = !data.isLiked;
+        if(data.isLiked) {
+            data.likesCount++;
+        } else {
+            data.likesCount--;
+        }
+        updateModalData(currentPostId);
+    }
+
+    // Tương tác Lưu bài viết
+    function toggleSave() {
+        if (!currentPostId) return;
+        const data = postsDatabase[currentPostId];
+        data.isSaved = !data.isSaved;
+        updateModalData(currentPostId);
+    }
+
+    function focusCommentInput() {
+        document.getElementById('commentInput').focus();
+    }
+
+    // Đăng bình luận động trực tiếp vào mảng JS
+    function addComment() {
+        if (!currentPostId) return;
+        const input = document.getElementById('commentInput');
+        const text = input.value.trim();
+        if (text === '') return; 
+
+        const data = postsDatabase[currentPostId];
+        data.comments.push({
+            avatar: '../assets/Posts/C1.5.jpg', 
+            username: 'paws_user',
+            text: text,
+            time: 'Vừa xong'
+        });
+
+        input.value = ''; 
+        updateModalData(currentPostId); 
+        
+        const container = document.getElementById('modalCommentsContainer');
+        container.scrollTop = container.scrollHeight;
+    }
+  </script>
 </body>
 </html>
