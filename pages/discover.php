@@ -15,7 +15,6 @@ try {
     $db = new PDO($dsn, USER, PASSWORD);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-   
     $query = "SELECT BaiDang.*, NguoiDung.tenDangNhap, PhuongTien.duongDan
               FROM BaiDang 
               JOIN NguoiDung ON BaiDang.maNguoiDung = NguoiDung.maNguoiDung
@@ -30,7 +29,7 @@ try {
     $errorMsg = "Lỗi kết nối Cơ sở dữ liệu: " . $e->getMessage();
 }
 
-
+// Danh sách 22 file ảnh cún mèo có sẵn trong thư mục assets/Posts của bạn
 $localPetImages = [
     'C1.1.jpg', 'C1.2.jpg', 'C1.3.jpg', 'C1.4.jpg', 'C1.5.jpg', 'C1.6.jpg', 'C1.7.jpg', 'C1.8.jpg',
     'C2.1.jpg', 'C5.1.jpg', 'C5.2.jpg',
@@ -48,7 +47,7 @@ $localPetImages = [
   <link rel="stylesheet" href="../assets/css/styles.css">
   
   <style>
-    
+    /* ĐỊNH DẠNG THANH SIDEBAR VÀ ICON CHUẨN KHÔNG BỊ TO ĐÙNG */
     .left-sidebar {
         padding-top: 30px !important;
         border-right: 1px solid #efefef;
@@ -73,7 +72,7 @@ $localPetImages = [
         margin: 40px auto !important;
     }
 
-    
+    /* ĐỊNH DẠNG LƯỚI ẢNH KHÁM PHÁ THÚ CƯNG */
     .explore-item {
         display: block;
         position: relative;
@@ -89,7 +88,7 @@ $localPetImages = [
         display: block;
     }
 
-    
+    /* ĐIỀU HƯỚNG NÚT CHUYỂN BÀI TRÊN MODAL POPUP */
     .modal-nav-btn {
         position: absolute;
         top: 50%;
@@ -124,33 +123,18 @@ $localPetImages = [
     <div class="row g-0">
       
       <aside class="left-sidebar col-2 col-md-1">
-        <aside class="left-sidebar col-2 col-md-1">
-        <a class="sidebar-logo mb-4" href="../index.php">
+        <a class="sidebar-logo mb-4" href="homepage.php" data-bs-toggle="tooltip" data-bs-title="Trang chủ PawConnect">
             <img src="../assets/icon/PawsConnect.png" alt="PawConnect Logo" />
         </a>
         <nav class="sidebar-nav">
-            <a href="../index.php" class="nav-icon"><img src="../assets/icon/home_5973558.png" alt="Home" /></a>
-            <a href="search.php" class="nav-icon"><img src="../assets/icon/search.png" alt="Search" /></a>
-            <a href="discover.php" class="nav-icon active"><img src="../assets/icon/discovery_12028921.png" alt="Discover" /></a>
-            <a href="create-post.php" class="nav-icon"><img src="../assets/icon/add.png" alt="Create" /></a>
-            <a href="profile.php" class="nav-icon"><img src="../assets/icon/user.png" alt="Account" /></a>
-        </nav>
-        <a href="settings.php" class="nav-icon settings-icon">
-            <img src="../assets/icon/setting.png" alt="Settings" />
-        </a>
-      </aside>
-        <a class="sidebar-logo mb-4" href="../index.php" data-bs-toggle="tooltip" data-bs-title="Trang chủ PawConnect">
-            <img src="../assets/SOURCE%20IMAGES/PawsConnect.png" alt="PawConnect Logo" />
-        </a>
-        <nav class="sidebar-nav">
-            <a href="../index.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Home"><img src="../assets/SOURCE%20IMAGES/home_5973558.png" alt="Home" /></a>
-            <a href="search.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Search"><img src="../assets/SOURCE%20IMAGES/search.png" alt="Search" /></a>
-            <a href="discover.php" class="nav-icon active" data-bs-toggle="tooltip" data-bs-title="Discover"><img src="../assets/SOURCE%20IMAGES/discovery_12028921.png" alt="Discover" /></a>
-            <a href="create-post.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Create New Post"><img src="../assets/SOURCE%20IMAGES/add.png" alt="Create" /></a>
-            <a href="profile.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="User Account"><img src="../assets/SOURCE%20IMAGES/user.png" alt="Account" /></a>
+            <a href="homepage.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Home"><img src="../assets/icon/home_5973558.png" alt="Home" /></a>
+            <a href="search.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Search"><img src="../assets/icon/search.png" alt="Search" /></a>
+            <a href="discover.php" class="nav-icon active" data-bs-toggle="tooltip" data-bs-title="Discover"><img src="../assets/icon/discovery_12028921.png" alt="Discover" /></a>
+            <a href="create-post.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Create New Post"><img src="../assets/icon/add.png" alt="Create" /></a>
+            <a href="profile.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="User Account"><img src="../assets/icon/user.png" alt="Account" /></a>
         </nav>
         <a href="settings.php" class="nav-icon settings-icon" data-bs-toggle="tooltip" data-bs-title="Settings">
-            <img src="../assets/SOURCE%20IMAGES/setting.png" alt="Settings" />
+            <img src="../assets/icon/setting.png" alt="Settings" />
         </a>
       </aside>
 
@@ -320,7 +304,6 @@ $localPetImages = [
       }
     }
 
-    // SỬA LỖI ĐIỀU HƯỚNG BẰNG CẢ NÚT PHÍM MŨI TÊN VÀ NÚT SỰ KIỆN < >
     document.addEventListener('keydown', function(event) {
       if (currentPostId) {
         if (event.key === 'ArrowRight' || event.key === '>') nextPost();
@@ -404,6 +387,7 @@ $localPetImages = [
         updateModalData(currentPostId);
     }
 
+    // Tương tác Thả tim bài viết
     function toggleLike() {
         if (!currentPostId) return;
         const data = postsDatabase[currentPostId];
