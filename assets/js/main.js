@@ -20,7 +20,9 @@ function postIdFromElement(el) {
   return id || null;
 }
 
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]',
+);
 tooltipTriggerList.forEach((el) => {
   new bootstrap.Tooltip(el, {
     trigger: "hover focus",
@@ -94,7 +96,8 @@ function renderComments(items) {
   commentsList.innerHTML = "";
 
   if (!items.length) {
-    commentsList.innerHTML = '<li class="comment-empty">Chưa có bình luận nào.</li>';
+    commentsList.innerHTML =
+      '<li class="comment-empty">Chưa có bình luận nào.</li>';
     return;
   }
 
@@ -111,15 +114,19 @@ async function loadComments(postId) {
   if (!commentsList) return;
   commentsList.innerHTML = '<li class="comment-empty">Đang tải...</li>';
   try {
-    const res = await fetch(`${apiUrl("comments.php")}?post_id=${encodeURIComponent(postId)}`);
+    const res = await fetch(
+      `${apiUrl("comments.php")}?post_id=${encodeURIComponent(postId)}`,
+    );
     const data = await res.json();
     if (!data.ok) {
-      commentsList.innerHTML = '<li class="comment-empty">Không tải được bình luận.</li>';
+      commentsList.innerHTML =
+        '<li class="comment-empty">Không tải được bình luận.</li>';
       return;
     }
     renderComments(data.comments ?? []);
   } catch {
-    commentsList.innerHTML = '<li class="comment-empty">Không tải được bình luận.</li>';
+    commentsList.innerHTML =
+      '<li class="comment-empty">Không tải được bình luận.</li>';
   }
 }
 
