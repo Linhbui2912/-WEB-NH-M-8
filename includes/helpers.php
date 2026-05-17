@@ -138,6 +138,11 @@ function json_response(array $payload, int $status = 200): never
     exit;
 }
 
+function h(?string $value): string
+{
+    return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
 function paw_db(): mysqli
 {
     static $conn = null;
