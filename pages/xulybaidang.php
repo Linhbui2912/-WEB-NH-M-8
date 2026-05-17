@@ -62,9 +62,9 @@ if (isset($_POST['noidung'])) {
     giaiPhongBoNho($link, null);
     // Chuyển về trang trang chủ
     if ($result) {
-        header("Location: ../index.php?msg=done");
+        header("Location: homepage.php?msg=done");
     } else {
-        header("Location: ../index.php?msg=error");
+        header("Location: homepage.php?msg=error");
     }
 }
 ?>
