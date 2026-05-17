@@ -124,18 +124,33 @@ $localPetImages = [
     <div class="row g-0">
       
       <aside class="left-sidebar col-2 col-md-1">
-        <a class="sidebar-logo mb-4" href="../index.html">
+        <aside class="left-sidebar col-2 col-md-1">
+        <a class="sidebar-logo mb-4" href="../index.php">
             <img src="../assets/icon/PawsConnect.png" alt="PawConnect Logo" />
         </a>
         <nav class="sidebar-nav">
-            <a href="../index.html" class="nav-icon"><img src="../assets/icon/home_5973558.png" alt="Home" /></a>
-            <a href="search.html" class="nav-icon"><img src="../assets/icon/search.png" alt="Search" /></a>
+            <a href="../index.php" class="nav-icon"><img src="../assets/icon/home_5973558.png" alt="Home" /></a>
+            <a href="search.php" class="nav-icon"><img src="../assets/icon/search.png" alt="Search" /></a>
             <a href="discover.php" class="nav-icon active"><img src="../assets/icon/discovery_12028921.png" alt="Discover" /></a>
-            <a href="create-post.html" class="nav-icon"><img src="../assets/icon/add.png" alt="Create" /></a>
-            <a href="profile.html" class="nav-icon"><img src="../assets/icon/user.png" alt="Account" /></a>
+            <a href="create-post.php" class="nav-icon"><img src="../assets/icon/add.png" alt="Create" /></a>
+            <a href="profile.php" class="nav-icon"><img src="../assets/icon/user.png" alt="Account" /></a>
         </nav>
-        <a href="settings.html" class="nav-icon settings-icon">
+        <a href="settings.php" class="nav-icon settings-icon">
             <img src="../assets/icon/setting.png" alt="Settings" />
+        </a>
+      </aside>
+        <a class="sidebar-logo mb-4" href="../index.php" data-bs-toggle="tooltip" data-bs-title="Trang chủ PawConnect">
+            <img src="../assets/SOURCE%20IMAGES/PawsConnect.png" alt="PawConnect Logo" />
+        </a>
+        <nav class="sidebar-nav">
+            <a href="../index.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Home"><img src="../assets/SOURCE%20IMAGES/home_5973558.png" alt="Home" /></a>
+            <a href="search.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Search"><img src="../assets/SOURCE%20IMAGES/search.png" alt="Search" /></a>
+            <a href="discover.php" class="nav-icon active" data-bs-toggle="tooltip" data-bs-title="Discover"><img src="../assets/SOURCE%20IMAGES/discovery_12028921.png" alt="Discover" /></a>
+            <a href="create-post.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Create New Post"><img src="../assets/SOURCE%20IMAGES/add.png" alt="Create" /></a>
+            <a href="profile.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="User Account"><img src="../assets/SOURCE%20IMAGES/user.png" alt="Account" /></a>
+        </nav>
+        <a href="settings.php" class="nav-icon settings-icon" data-bs-toggle="tooltip" data-bs-title="Settings">
+            <img src="../assets/SOURCE%20IMAGES/setting.png" alt="Settings" />
         </a>
       </aside>
 
