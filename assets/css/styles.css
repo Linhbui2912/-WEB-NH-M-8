@@ -1,4 +1,10 @@
 :root {
+  --pc-bg: #faf8f5;
+  --pc-sidebar: #fff;
+  --pc-border: #e8e4df;
+  --pc-text: #1a1a1a;
+  --pc-muted: #6b6b6b;
+  --pc-accent: #c45c26;
   --sidebar-width: 92px;
   --feed-width: 640px;
   --bg-page: #efefef;
@@ -13,6 +19,26 @@
 
 body {
   margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--pc-bg);
+  color: var(--pc-text);
+}
+
+.left-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem 0.5rem;
+  background: var(--pc-sidebar);
+  border-right: 1px solid var(--pc-border);
+}
+
+.sidebar-logo img {
+  width: 42px;
+  height: 42px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: var(--bg-page);
   color: var(--text-main);
@@ -45,17 +71,24 @@ body {
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  align-self: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex: 1;
 }
 
 .nav-icon {
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  transition: background-color 0.18s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.nav-icon:hover,
+.nav-icon.active {
+  background: #f3efe9;
 }
 
 .nav-icon img {
@@ -64,49 +97,48 @@ body {
   object-fit: contain;
 }
 
-.nav-icon:hover,
-.nav-icon.active {
-  background: #e4e4e4;
-}
-
 .settings-icon {
-  margin-top: 0.75rem;
+  margin-top: auto;
 }
 
 .feed-wrapper {
-  margin-left: var(--sidebar-width);
-  width: calc(100% - var(--sidebar-width));
-  display: flex;
-  justify-content: center;
-  padding: 1.1rem 1rem 2rem;
-}
-
-.feed-column {
-  width: 100%;
-  max-width: var(--feed-width);
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
 }
 
 .post-card {
-  background: var(--bg-card);
-  border-radius: 10px;
-  padding: 0.9rem;
-  margin-bottom: 1rem;
+  background: #fff;
+  border: 1px solid var(--pc-border);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
 }
 
 .post-header {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 0.75rem;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
 }
 
-.avatar {
-  width: 38px;
-  height: 38px;
+.post-header .avatar {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
 
+.post-header .username {
+  font-size: 0.95rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.post-time {
+  font-size: 0.75rem;
+  color: var(--pc-muted);
+  margin: 0;
 .username {
   font-size: 0.96rem;
   margin: 0;
@@ -155,77 +187,84 @@ body {
 
 .post-image {
   width: 100%;
+  display: block;
+  aspect-ratio: 1;
   border-radius: 6px;
   object-fit: cover;
 }
 
 .post-actions {
   display: flex;
-  gap: 0.45rem;
-  margin-top: 0.55rem;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
 }
 
 .icon-btn {
-  border: 0;
-  background: transparent;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-}
-
-.icon-btn:hover {
-  background: #f1f1f1;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
 }
 
 .icon-btn img {
-  width: 21px;
-  height: 21px;
-  object-fit: contain;
+  width: 28px;
+  height: 28px;
 }
 
 .post-caption {
-  margin-top: 0.25rem;
-  font-size: 0.92rem;
+  padding: 0 1rem 1rem;
+  font-size: 0.9rem;
 }
 
-.comments-modal {
-  border-radius: 14px;
+.comments-modal .modal-body {
+  max-height: 360px;
+  overflow-y: auto;
 }
 
 .comments-list {
   list-style: none;
-  margin: 0;
   padding: 0;
-  max-height: 320px;
-  overflow-y: auto;
+  margin: 0;
 }
 
 .comments-list li {
-  padding: 0.55rem 0;
-  border-bottom: 1px solid #ececec;
-  font-size: 0.92rem;
-}
-
-.comments-list li:last-child {
-  border-bottom: 0;
-}
-
-.comment-user {
-  font-weight: 600;
-  margin-right: 0.35rem;
-}
-
-.comment-empty {
-  color: var(--text-soft);
-  text-align: center;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.9rem;
 }
 
 .comment-input-wrap {
   display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .left-sidebar {
+    flex-direction: row;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    z-index: 100;
+    border-right: none;
+    border-top: 1px solid var(--pc-border);
+    padding: 0.5rem;
+  }
+
+  .sidebar-logo,
+  .settings-icon {
+    display: none;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+}
   flex-wrap: nowrap;
   gap: 0.5rem;
 }
