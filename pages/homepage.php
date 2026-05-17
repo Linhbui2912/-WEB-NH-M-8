@@ -102,7 +102,19 @@ $apiBase = '../';
   </div>
 
   <?php require __DIR__ . '/../partials/comments_modal.php'; ?>
-
+    <?php
+                      if (isset($_GET['msg'])) {
+                          if ($_GET['msg'] == "done") {
+                        echo '<div style="position: fixed; top: 20px; right: 20px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 15px;">
+                        <b>Thành công!</b> Bài viết của bạn đã được đăng.
+                        </div>';
+                      } elseif ($_GET['msg'] == "error") {
+                      echo '<div style="position: fixed; top: 20px; right: 20px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 5px; margin-bottom: 15px;">
+                      <b>Lỗi!</b> Không thể lưu bài đăng, vui lòng thử lại.
+                      </div>';
+                    }
+                    }
+    ?>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="<?= h($assetPrefix) ?>assets/js/main.js"></script>
 </body>
