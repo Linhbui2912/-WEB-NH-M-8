@@ -1,33 +1,33 @@
-<?php
-session_start();
-
-// Bảo vệ trang chủ: Chặn tuyệt đối nếu chưa đăng nhập tài khoản
-if (!isset($_SESSION['maNguoiDung'])) {
-    header("Location: ../views/dangnhap.php?msg=login-required");
-    exit();
-}
-?>
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Babe Nuboli - Mạng xã hội Mẹ & Bé</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-</head>
-<body>
-    <div class="d-flex">
-        
-        <?php include "left-side-menu.php"; ?>
-
-        <div class="p-4 flex-grow-1" style="background-color: #f8f9fa;">
-            <div class="container bg-white p-4 rounded shadow-sm" style="max-width: 700px;">
-                <h3>Bảng tin Babe Nuboli</h3>
-                <p>Nơi các mẹ bỉm sữa trao đổi kinh nghiệm nuôi dạy con và thanh lý đồ dùng...</p>
-                <hr>
-                </div>
-        </div>
-
-    </div>
-</body>
+<?php declare(strict_types=1); session_start(); if (!isset($_SESSION['maNguoiDung'])) { header('Location: dangnhap.php?msg=login-required'); exit(); } 
+require_once __DIR__ . '/../models/homepage_helpers.php'; 
+require_once __DIR__ . '/../controllers/HomepageController.php'; 
+$viewerId = (string) $_SESSION['maNguoiDung']; 
+$posts = HomepageController::getFeed($viewerId); 
+$activeNav = 'home'; $assetPrefix = '../'; 
+$apiControllers = '../controllers/'; 
+?> 
+<!doctype html> 
+<html lang="vi"> 
+    <head> 
+        <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>PawConnect - Home</title> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    <link rel="stylesheet" href="<?= hp_h($assetPrefix) ?>assets/css/homepage.css"> 
+</head> 
+<body data-api-controllers="<?= hp_h($apiControllers) ?>" data-viewer-id="<?= hp_h($viewerId) ?>"> 
+    <div class="container-fluid px-0 app-shell"> 
+        <div class="row g-0"> <?php require __DIR__ . '/partials/homepage/sidebar.php'; ?> 
+        <main class="feed-wrapper col"> 
+            <section class="feed-column"> <?php if (count($posts) === 0): ?> 
+                <p class="text-secondary text-center mt-4">Chưa có bài đăng nào trên bảng tin.</p> 
+                <?php else: ?> 
+                    <?php foreach ($posts as $post): ?> 
+                        <?php require __DIR__ . '/partials/homepage/post_card.php'; ?> 
+                        <?php endforeach; ?> <?php endif; ?> </section> </main> </div> </div> 
+                        <?php require __DIR__ . '/partials/homepage/post_detail_modal.php'; ?> 
+                        <?php require __DIR__ . '/partials/homepage/report_modal.php'; ?> 
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
+                        <script src="<?= hp_h($assetPrefix) ?>assets/js/homepage.js"></script> 
+</body> 
 </html>
