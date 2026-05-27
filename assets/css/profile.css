@@ -1,0 +1,460 @@
+/* Chỉ nowrap cho row ngoài cùng (sidebar + main), không đụng vào grid bài đăng */
+.profile-page > .container-fluid > .row,
+.profile-page .min-vh-100.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.profile-posts.row {
+  flex-wrap: wrap !important;
+}
+
+/* Sidebar fixed (styles_pro.css) — không chiếm cột Bootstrap, tránh lệch lưới bài đăng */
+.profile-page .left-sidebar.col-2,
+.profile-page .left-sidebar.col-md-1 {
+  flex: 0 0 0 !important;
+  max-width: 0 !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  overflow: visible;
+}
+
+.profile-page .profile-main,
+.profile-page .profile-main.col-md-11 {
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+  max-width: none;
+  flex: 1 1 auto;
+  min-width: 0;
+  background: var(--pc-bg);
+  min-height: 100vh;
+  padding-bottom: 5rem;
+  overflow-x: hidden;
+}
+
+.profile-content-wrap {
+  max-width: 935px;
+  width: 100%;
+}
+
+.profile-avatar-box {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-username {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.profile-name {
+  color: var(--pc-muted);
+  font-size: 1rem;
+}
+
+.profile-stats {
+  font-size: 0.95rem;
+  color: var(--pc-text);
+}
+
+.profile-stats strong {
+  font-weight: 700;
+}
+
+.profile-stat-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.profile-stat-btn:hover {
+  color: var(--pc-muted);
+}
+
+.follow-list-dialog {
+  max-width: 400px;
+}
+
+.follow-list-modal {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.follow-list-modal .modal-header {
+  padding: 1rem 1rem 0.5rem;
+}
+
+.follow-list-modal .modal-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.follow-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--pc-border);
+}
+
+.follow-list-item:last-child {
+  border-bottom: none;
+}
+
+.follow-list-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.follow-list-user:hover {
+  color: inherit;
+  opacity: 0.85;
+}
+
+.follow-list-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.follow-list-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.follow-list-username {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.follow-list-name {
+  font-size: 0.8rem;
+  color: var(--pc-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-follow-list {
+  flex-shrink: 0;
+  background: var(--pc-accent);
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+.btn-follow-list:hover {
+  background: #a84d1f;
+  color: #fff;
+}
+
+.btn-follow-list.following {
+  background: #e8e4df;
+  color: var(--pc-text);
+}
+
+.btn-follow-list.following:hover {
+  background: #ddd8d2;
+  color: var(--pc-text);
+}
+
+.profile-bio {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 420px;
+}
+
+.btn-follow {
+  background: var(--pc-accent);
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+}
+
+.btn-follow:hover {
+  background: #a84d1f;
+  color: #fff;
+}
+
+.btn-follow.following {
+  background: #e8e4df;
+  color: var(--pc-text);
+}
+
+.btn-pet {
+  background: #fff;
+  border: 1px solid var(--pc-border);
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+}
+
+.btn-pet:hover {
+  background: #f8f6f3;
+}
+
+.profile-posts {
+  --bs-gutter-x: 4px;
+  --bs-gutter-y: 4px;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.profile-post-col {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.post-item {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  cursor: pointer;
+  background: #eee;
+}
+
+.post-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.post-item:hover img {
+  transform: scale(1.03);
+}
+
+.post-item-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.post-item:hover .post-item-overlay {
+  opacity: 1;
+}
+
+.post-item-overlay img {
+  width: 22px;
+  height: 22px;
+  filter: brightness(0) invert(1);
+}
+
+.profile-demo-link.active {
+  background: var(--pc-accent);
+  border-color: var(--pc-accent);
+  color: #fff;
+}
+
+/* Modal chi tiết bài đăng - Instagram style */
+.post-detail-dialog {
+  max-width: 1050px;
+}
+
+.post-detail-modal {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  min-height: 500px;
+  position: relative;
+}
+
+.post-detail-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  padding: 0.5rem;
+  opacity: 0.85;
+}
+
+.post-detail-inner {
+  min-height: 500px;
+}
+
+.post-detail-media {
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.post-detail-media img {
+  width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+}
+
+.post-detail-panel {
+  min-height: 400px;
+  max-height: 85vh;
+  border-left: 1px solid var(--pc-border);
+}
+
+.post-detail-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--pc-border);
+}
+
+.post-detail-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.post-detail-username {
+  font-weight: 600;
+  color: var(--pc-text);
+  font-size: 0.95rem;
+}
+
+.post-detail-time {
+  font-size: 0.75rem;
+  color: var(--pc-muted);
+}
+
+.post-detail-body {
+  padding: 1rem;
+}
+
+.post-detail-caption {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.post-detail-comments li {
+  display: flex;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.post-detail-comments .comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.post-detail-comments .comment-body strong {
+  margin-right: 0.35rem;
+}
+
+.post-detail-comments .comment-time {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--pc-muted);
+  margin-top: 0.2rem;
+}
+
+.post-detail-footer {
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px solid var(--pc-border);
+}
+
+.post-action-btn img {
+  display: block;
+}
+
+.post-detail-likes {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.post-comment-submit {
+  font-weight: 600;
+  color: var(--pc-accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.post-comment-submit:disabled {
+  color: #b0b0b0;
+  pointer-events: none;
+}
+
+.post-detail-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 20;
+}
+
+#btnLikePost.liked img {
+  content: url("../icon/pawheart.png");
+}
+
+@media (max-width: 991px) {
+  .post-detail-panel {
+    border-left: none;
+    border-top: 1px solid var(--pc-border);
+    max-height: 50vh;
+  }
+
+  .post-detail-media {
+    min-height: 280px;
+  }
+
+  .post-detail-media img {
+    max-height: 50vh;
+  }
+}
+
+@media (max-width: 576px) {
+  .profile-username {
+    font-size: 1.35rem;
+  }
+
+  .profile-avatar-box {
+    width: 96px;
+    height: 96px;
+  }
+}
