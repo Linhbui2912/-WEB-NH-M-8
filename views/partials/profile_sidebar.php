@@ -6,20 +6,20 @@ declare(strict_types=1);
 $icon = static fn (string $name): string => asset_url('icon/' . $name);
 ?>
 <aside class="left-sidebar col-2 col-md-1">
-  <a class="sidebar-logo mb-4" href="dangnhap.php" data-bs-toggle="tooltip" data-bs-title="PawConnect">
+  <a class="sidebar-logo mb-4" href="homepage.php" data-bs-toggle="tooltip" data-bs-title="PawConnect">
     <img src="<?= h($icon('PawsConnect.png')) ?>" alt="PawConnect Logo" />
   </a>
   <nav class="sidebar-nav">
-    <a href="profile.php" class="nav-icon<?= $activeNav === 'profile' ? ' active' : '' ?>" data-bs-toggle="tooltip" data-bs-title="Profile">
+    <a href="homepage.php" class="nav-icon<?= $activeNav === 'profile' ? ' active' : '' ?>" data-bs-toggle="tooltip" data-bs-title="Profile">
       <img src="<?= h($icon('home_5973558.png')) ?>" alt="Home" />
     </a>
     <a href="#" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Search">
       <img src="<?= h($icon('search.png')) ?>" alt="Search" />
     </a>
-    <a href="#" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Discover">
+    <a href="../controllers/dc_discover_controller.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Discover">
       <img src="<?= h($icon('discovery_12028921.png')) ?>" alt="Discover" />
     </a>
-    <a href="#" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Create">
+    <a href="create-post.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Create">
       <img src="<?= h($icon('add.png')) ?>" alt="Create" />
     </a>
     <a href="profile.php" class="nav-icon<?= $activeNav === 'profile' ? ' active' : '' ?>" data-bs-toggle="tooltip" data-bs-title="Account">
@@ -30,3 +30,4 @@ $icon = static fn (string $name): string => asset_url('icon/' . $name);
     <img src="<?= h($icon('setting.png')) ?>" alt="Settings" />
   </button>
 </aside>
+
