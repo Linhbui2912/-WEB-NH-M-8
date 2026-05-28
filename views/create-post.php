@@ -45,7 +45,7 @@
               ><img src="../assets/icon/search.png" alt="Search"
             /></a>
             <a
-              href="discover.php"
+              href="../controllers/dc_discover_controller.php"
               class="nav-icon"
               data-bs-toggle="tooltip"
               data-bs-title="Discover"
