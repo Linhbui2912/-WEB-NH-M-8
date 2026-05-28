@@ -1,6 +1,7 @@
-<!-- File chứa các hàm  kết nối, truy vấn và giải phóng bộ nhớ -->
-<!-- Sử dụng tham số truyền vào từ file config.php -->
+
 <?php
+//File chứa các hàm  kết nối, truy vấn và giải phóng bộ nhớ
+//Sử dụng tham số truyền vào từ file config.php
 require_once "config.php";
 function taoKetNoi(&$link) // mở kết máy chủ đến CSDL
 {  

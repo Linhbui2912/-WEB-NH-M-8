@@ -27,7 +27,7 @@
             background-color: #ff5252;
             color: white;
             transform: translateY(-1px);
-        }        
+        }
         .brand-logo {
             font-size: 3rem;
             color: #ff6b6b;

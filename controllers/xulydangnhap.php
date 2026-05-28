@@ -17,7 +17,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
         $_SESSION['maNguoiDung'] = $user->getMaNguoiDung();
         $_SESSION['maQuyen']     = $user->getMaQuyen();
         giaiPhongBoNho($link,true);
-        header("Location: ../views/create-post.php");        
+        header("Location: ../views/homepage.php");        
     } else {
         giaiPhongBoNho($link,true);
         header("Location: ../views/dangnhap.php?msg=login-fail");
