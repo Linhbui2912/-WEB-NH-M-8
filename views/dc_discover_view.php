@@ -1,5 +1,5 @@
 <?php
-// BÍ QUYẾT TỪ FILE CŨ: Mảng 22 file ảnh cún mèo chuẩn xác
+
 $localPetImages = [
     'C1.1.jpg', 'C1.2.jpg', 'C1.3.jpg', 'C1.4.jpg', 'C1.5.jpg', 'C1.6.jpg', 'C1.7.jpg', 'C1.8.jpg',
     'C2.1.jpg', 'C5.1.jpg', 'C5.2.jpg',
@@ -13,14 +13,14 @@ if (!empty($danhSachBaiDang)) {
         $chosenImage = $localPetImages[$imgIndex % count($localPetImages)];
         $p['duongDan_fixed'] = $chosenImage;
         
-        // Xử lý đuôi ảnh avatar
+     
         $ava = $p['anhDaiDien'] ?? '';
         if ($ava !== '' && !preg_match('/\.(jpg|jpeg|png|gif)$/i', $ava)) {
             $ava .= '.jpg';
         }
-        $p['anhDaiDien_fixed'] = $ava ?: 'C1.jpg'; // Mặc định C1.jpg theo đúng folder Profile của bạn
+        $p['anhDaiDien_fixed'] = $ava ?: 'C1.jpg'; 
         
-        // Tạo sẵn mảng rỗng để lưu comment riêng cho từng bài
+        
         $p['comments'] = [];
         
         $imgIndex++;
@@ -75,17 +75,17 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
   <div class="container-fluid px-0">
     <div class="row g-0">
       <aside class="left-sidebar">
-        <a class="sidebar-logo mb-4" href="homepage.php" data-bs-toggle="tooltip" data-bs-title="Trang chủ PawConnect">
+        <a class="sidebar-logo mb-4" href="../views/homepage.php" data-bs-toggle="tooltip" data-bs-title="Trang chủ PawConnect">
             <img src="../assets/icon/PawsConnect.png" alt="PawConnect Logo" />
         </a>
         <nav class="sidebar-nav">
-            <a href="homepage.php" class="nav-icon"><img src="../assets/icon/home_5973558.png" alt="Home" /></a>
-            <a href="search.php" class="nav-icon"><img src="../assets/icon/search.png" alt="Search" /></a>
+            <a href="../views/homepage.php" class="nav-icon"><img src="../assets/icon/home_5973558.png" alt="Home" /></a>
+            <a href="../views/search.php" class="nav-icon"><img src="../assets/icon/search.png" alt="Search" /></a>
             <a href="../controllers/dc_discover_controller.php" class="nav-icon active"><img src="../assets/icon/discovery_12028921.png" alt="Discover" /></a>
-            <a href="create-post.php" class="nav-icon"><img src="../assets/icon/add.png" alt="Create" /></a>
-            <a href="profile.php" class="nav-icon"><img src="../assets/icon/user.png" alt="Account" /></a>
+            <a href="../views/create-post.php" class="nav-icon"><img src="../assets/icon/add.png" alt="Create" /></a>
+            <a href="../views/profile.php" class="nav-icon"><img src="../assets/icon/user.png" alt="Account" /></a>
         </nav>
-        <a href="settings.php" class="nav-icon settings-icon">
+        <a href="../views/settings.php" class="nav-icon settings-icon">
             <img src="../assets/icon/setting.png" alt="Settings" />
         </a>
       </aside>
@@ -200,7 +200,7 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         reportModalInstance = new bootstrap.Modal(document.getElementById('reportModal'), { backdrop: false });
     });
 
-    // FIX BÀN PHÍM: Cho phép bấm mũi tên trái phải để chuyển bài
+   
     document.addEventListener('keydown', function(event) {
       if (currentIndex !== -1 && document.getElementById('postDetailModal').classList.contains('show')) {
         if (event.key === 'ArrowRight' || event.key === '>') nextPost();
@@ -215,7 +215,7 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
 
         document.getElementById('modalMainImg').src = '../assets/Posts/' + data.duongDan_fixed;
         
-        // FIX LỖI ẢNH AVATAR: Xử lý an toàn với onerror bằng Javascript
+      
         let avaSrc = '../assets/Profile/' + data.anhDaiDien_fixed;
         let imgHeader = document.getElementById('modalHeaderAvatar');
         let imgCap = document.getElementById('modalAvatarCap');
@@ -234,7 +234,7 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         likeIcon.src = '../assets/icon/footprint.png';
         likeIcon.setAttribute('data-liked', 'false');
 
-        // FIX LỖI COMMENT: Dọn sạch bình luận cũ, chỉ load bình luận của bài này
+       
         const commentsContainer = document.getElementById('modalCommentsContainer');
         commentsContainer.innerHTML = ''; 
         if (data.comments && data.comments.length > 0) {
@@ -314,19 +314,19 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         });
     }
 
-    // FIX LỖI COMMENT LƯU SAI CHỖ
+ 
     function addComment() {
         const input = document.getElementById('commentInput');
         const text = input.value.trim();
         if (text === '') return; 
         
-        // Lưu thẳng vào mảng data để giữ lại cho riêng bài viết này
+      
         postsArray[currentIndex].comments.push({
             username: 'Bạn',
             text: text
         });
         
-        // Hiển thị ra màn hình
+ 
         let newComment = `
             <div class="d-flex mb-3">
                 <img src="../assets/Profile/C1.jpg" class="rounded-circle me-2 border" width="32" height="32" style="object-fit: cover;">
@@ -335,7 +335,7 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         document.getElementById('modalCommentsContainer').insertAdjacentHTML('beforeend', newComment);
         input.value = ''; 
         
-        // Cuộn xuống cuối để thấy bình luận mới
+       
         const container = document.getElementById('modalCommentsContainer');
         container.scrollTop = container.scrollHeight;
     }
