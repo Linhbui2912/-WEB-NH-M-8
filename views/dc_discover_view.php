@@ -54,7 +54,18 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         align-items: center; 
     }
     .sidebar-logo img { width: 40px; display: block; }
-    .sidebar-nav { display: flex; flex-direction: column; gap: 35px; margin-top: 40px; width: 100%; align-items: center; }
+    
+    /* ĐÃ SỬA: Thêm flex-grow và justify-content để căn giữa menu */
+    .sidebar-nav { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 35px; 
+        width: 100%; 
+        align-items: center; 
+        flex-grow: 1; 
+        justify-content: center; 
+    }
+    
     .sidebar-nav .nav-icon img, .settings-icon img { width: 26px; height: 26px; display: block; transition: transform 0.2s;}
     .sidebar-nav .nav-icon:hover img, .settings-icon:hover img { transform: scale(1.1); }
     
@@ -140,17 +151,21 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
           <div class="col-md-5 d-flex flex-column bg-white" style="height: 100%; max-height: 90vh;">
             
             <div class="p-3 border-bottom d-flex align-items-center">
-              <img id="modalHeaderAvatar" src="" class="rounded-circle me-2 border" width="32" height="32" style="object-fit: cover;">
-              <div class="d-flex align-items-center flex-grow-1">
-                <span id="modalHeaderName" class="fw-bold" style="font-size: 0.9rem;"></span>
-              </div>
+              <a id="modalHeaderProfileLink" href="#" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                  <img id="modalHeaderAvatar" src="" class="rounded-circle me-2 border" width="32" height="32" style="object-fit: cover;">
+                  <span id="modalHeaderName" class="fw-bold" style="font-size: 0.9rem;"></span>
+              </a>
             </div>
 
             <div class="p-3 flex-grow-1 overflow-auto ig-scrollbar" style="min-height: 250px;">
                 <div class="d-flex mb-3">
-                    <img id="modalAvatarCap" src="" class="rounded-circle me-2 border" width="32" height="32" style="object-fit: cover;">
+                    <a id="modalCapProfileLink" href="#" style="text-decoration: none; color: inherit;">
+                        <img id="modalAvatarCap" src="" class="rounded-circle me-2 border" width="32" height="32" style="object-fit: cover;">
+                    </a>
                     <div>
-                        <span class="fw-bold me-1" id="modalCaptionUser" style="font-size: 0.9rem;"></span>
+                        <a id="modalCapNameLink" href="#" style="text-decoration: none; color: inherit;">
+                            <span class="fw-bold me-1" id="modalCaptionUser" style="font-size: 0.9rem;"></span>
+                        </a>
                         <span id="modalCaption" style="font-size: 0.9rem;"></span>
                     </div>
                 </div>
@@ -241,6 +256,12 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         document.getElementById('modalCaptionUser').innerText = data.tenDangNhap;
         document.getElementById('modalCaption').innerText = data.noiDung || '';
         document.getElementById('modalLikes').innerText = data.soLuotPaw + ' lượt paw';
+
+        // ĐÃ SỬA: Chèn link profile tự động thông qua Javascript dựa trên tenDangNhap
+        let profileUrl = '../controllers/profile_controller.php?user=' + encodeURIComponent(data.tenDangNhap);
+        document.getElementById('modalHeaderProfileLink').href = profileUrl;
+        document.getElementById('modalCapProfileLink').href = profileUrl;
+        document.getElementById('modalCapNameLink').href = profileUrl;
 
         const likeIcon = document.getElementById('modalLikeIcon');
         likeIcon.src = '../assets/icon/footprint.png';

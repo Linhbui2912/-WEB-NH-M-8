@@ -67,3 +67,5 @@ final class ProfileController
         require __DIR__ . '/../views/profile_view.php';
     }
 }
+
+ProfileController::show();
