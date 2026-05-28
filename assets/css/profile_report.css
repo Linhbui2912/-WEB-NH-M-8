@@ -1,0 +1,59 @@
+.profile-header-section {
+  position: relative;
+}
+
+.profile-report-account-btn {
+  position: absolute;
+  top: 0;
+  right: 0.5rem;
+  z-index: 5;
+}
+
+@media (min-width: 992px) {
+  .profile-report-account-btn {
+    right: 1rem;
+  }
+}
+
+.profile-report-modal .modal-content {
+  border-radius: 16px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.profile-report-reasons li {
+  border-bottom: 1px solid #efefef;
+}
+
+.profile-report-reasons li:last-child {
+  border-bottom: none;
+}
+
+.profile-report-reason-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0.85rem 0.25rem;
+  font-size: 0.95rem;
+  color: #262626;
+  transition: color 0.15s ease;
+}
+
+.profile-report-reason-btn:hover {
+  color: #0095f6;
+}
+
+.profile-report-reason-btn.selected {
+  color: #0095f6;
+  font-weight: 600;
+}
+
+.post-detail-actions .post-action-btn img {
+  display: block;
+}
+
+#btnLikePost.liked img {
+  content: url("../icon/pawheart.png");
+}
