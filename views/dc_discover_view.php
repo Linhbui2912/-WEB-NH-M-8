@@ -13,14 +13,14 @@ if (!empty($danhSachBaiDang)) {
         $chosenImage = $localPetImages[$imgIndex % count($localPetImages)];
         $p['duongDan_fixed'] = $chosenImage;
         
-     
+    
         $ava = $p['anhDaiDien'] ?? '';
         if ($ava !== '' && !preg_match('/\.(jpg|jpeg|png|gif)$/i', $ava)) {
             $ava .= '.jpg';
         }
         $p['anhDaiDien_fixed'] = $ava ?: 'C1.jpg'; 
         
-        
+       
         $p['comments'] = [];
         
         $imgIndex++;
@@ -39,17 +39,30 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body { background-color: #fafafa; }
-    .left-sidebar { padding-top: 30px; border-right: 1px solid #efefef; background: #fff; min-height: 100vh; position: fixed; width: 80px; z-index: 1000; }
-    .sidebar-logo img { width: 40px; display: block; margin: 0 auto; }
-    .sidebar-nav .nav-icon img, .settings-icon img { width: 26px; height: 26px; display: block; margin: 25px auto; transition: transform 0.2s;}
-    .sidebar-nav .nav-icon:hover img { transform: scale(1.1); }
-    .feed-wrapper { margin-left: 80px; padding-bottom: 50px; }
     
+
+    .left-sidebar { 
+        padding-top: 30px; 
+        border-right: 1px solid #efefef; 
+        background: #fff; 
+        min-height: 100vh; 
+        position: fixed; 
+        width: 80px; 
+        z-index: 1000; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+    }
+    .sidebar-logo img { width: 40px; display: block; }
+    .sidebar-nav { display: flex; flex-direction: column; gap: 35px; margin-top: 40px; width: 100%; align-items: center; }
+    .sidebar-nav .nav-icon img, .settings-icon img { width: 26px; height: 26px; display: block; transition: transform 0.2s;}
+    .sidebar-nav .nav-icon:hover img, .settings-icon:hover img { transform: scale(1.1); }
+    
+    .feed-wrapper { margin-left: 80px; padding-bottom: 50px; }
     .explore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
     .explore-item { display: block; position: relative; aspect-ratio: 1 / 1; overflow: hidden; border: none; padding: 0; cursor: pointer;}
     .explore-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
     
-    /* FIX LỖI NÚT CHUYỂN BÀI: Thêm pointer-events: auto */
     .modal-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.9); border: none; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; z-index: 1070; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: all 0.2s; pointer-events: auto; }
     .modal-nav-btn:hover { background: rgba(255, 255, 255, 1); transform: translateY(-50%) scale(1.05); }
     .modal-prev { left: -65px; } .modal-next { right: -65px; }
@@ -85,7 +98,8 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
             <a href="../views/create-post.php" class="nav-icon"><img src="../assets/icon/add.png" alt="Create" /></a>
             <a href="../views/profile.php" class="nav-icon"><img src="../assets/icon/user.png" alt="Account" /></a>
         </nav>
-        <a href="../views/settings.php" class="nav-icon settings-icon">
+        
+        <a href="../views/settings.php" class="nav-icon settings-icon mt-auto mb-4">
             <img src="../assets/icon/setting.png" alt="Settings" />
         </a>
       </aside>
@@ -200,7 +214,6 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         reportModalInstance = new bootstrap.Modal(document.getElementById('reportModal'), { backdrop: false });
     });
 
-   
     document.addEventListener('keydown', function(event) {
       if (currentIndex !== -1 && document.getElementById('postDetailModal').classList.contains('show')) {
         if (event.key === 'ArrowRight' || event.key === '>') nextPost();
@@ -215,7 +228,6 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
 
         document.getElementById('modalMainImg').src = '../assets/Posts/' + data.duongDan_fixed;
         
-      
         let avaSrc = '../assets/Profile/' + data.anhDaiDien_fixed;
         let imgHeader = document.getElementById('modalHeaderAvatar');
         let imgCap = document.getElementById('modalAvatarCap');
@@ -234,7 +246,6 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         likeIcon.src = '../assets/icon/footprint.png';
         likeIcon.setAttribute('data-liked', 'false');
 
-       
         const commentsContainer = document.getElementById('modalCommentsContainer');
         commentsContainer.innerHTML = ''; 
         if (data.comments && data.comments.length > 0) {
@@ -314,19 +325,16 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         });
     }
 
- 
     function addComment() {
         const input = document.getElementById('commentInput');
         const text = input.value.trim();
         if (text === '') return; 
         
-      
         postsArray[currentIndex].comments.push({
             username: 'Bạn',
             text: text
         });
         
- 
         let newComment = `
             <div class="d-flex mb-3">
                 <img src="../assets/Profile/C1.jpg" class="rounded-circle me-2 border" width="32" height="32" style="object-fit: cover;">
@@ -335,7 +343,6 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         document.getElementById('modalCommentsContainer').insertAdjacentHTML('beforeend', newComment);
         input.value = ''; 
         
-       
         const container = document.getElementById('modalCommentsContainer');
         container.scrollTop = container.scrollHeight;
     }
