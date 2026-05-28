@@ -34,6 +34,7 @@ try{
     // Sử dụng hàm mysqli_free_result
     mysqli_free_result($result);    
 }
-catch (TypeError $e) {}
+catch (TypeError $e) {
+}
 }
 ?>
