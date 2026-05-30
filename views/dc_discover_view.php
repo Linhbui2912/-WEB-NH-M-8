@@ -21,7 +21,10 @@ if (!empty($danhSachBaiDang)) {
         $p['anhDaiDien_fixed'] = $ava ?: 'C1.jpg'; 
         
        
-        $p['comments'] = [];
+  
+        if (!isset($p['comments'])) {
+            $p['comments'] = [];
+        }
         
         $imgIndex++;
         $safePosts[] = $p;
@@ -55,7 +58,7 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
     }
     .sidebar-logo img { width: 40px; display: block; }
     
-    /* ĐÃ SỬA: Thêm flex-grow và justify-content để căn giữa menu */
+  
     .sidebar-nav { 
         display: flex; 
         flex-direction: column; 
@@ -217,7 +220,7 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/settings.js"></script>
+  <script src="../assets/js/settings.js"></script>
 
   <script>
     const postsDataEl = document.getElementById('postsData');
@@ -258,8 +261,9 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         document.getElementById('modalCaption').innerText = data.noiDung || '';
         document.getElementById('modalLikes').innerText = data.soLuotPaw + ' lượt paw';
 
-        // ĐÃ SỬA: Chèn link profile tự động thông qua Javascript dựa trên tenDangNhap
-        let profileUrl = '../views/profile.php?user=' + encodeURIComponent(data.tenDangNhap);        document.getElementById('modalHeaderProfileLink').href = profileUrl;
+     
+        let profileUrl = '../views/profile.php?user=' + encodeURIComponent(data.tenDangNhap);        
+        document.getElementById('modalHeaderProfileLink').href = profileUrl;
         document.getElementById('modalCapProfileLink').href = profileUrl;
         document.getElementById('modalCapNameLink').href = profileUrl;
 
@@ -346,26 +350,61 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         });
     }
 
+    // ĐÃ SỬA: Hàm gửi bình luận trực tiếp sang Database
     function addComment() {
         const input = document.getElementById('commentInput');
         const text = input.value.trim();
         if (text === '') return; 
         
-        postsArray[currentIndex].comments.push({
-            username: 'Bạn',
-            text: text
+        const currentPost = postsArray[currentIndex];
+        
+        // Khóa input trong lúc chờ server phản hồi
+        input.disabled = true;
+
+        fetch('../controllers/CommentController.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                post_id: currentPost.maBaiDang, 
+                body: text 
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            input.disabled = false; // Mở khóa input
+            
+            if (data.ok) {
+                if (!currentPost.comments) currentPost.comments = [];
+                currentPost.comments.push({
+                    username: data.comment.username,
+                    text: data.comment.body
+                });
+                
+                let avatarSrc = data.comment.avatar ? data.comment.avatar : '../assets/Profile/C1.jpg';
+                
+                let newCommentHTML = `
+                    <div class="d-flex mb-3">
+                        <img src="${avatarSrc}" class="rounded-circle me-2 border" width="32" height="32" style="object-fit: cover;">
+                        <div>
+                            <span class="fw-bold me-1" style="font-size: 0.9rem;">${data.comment.username}</span>
+                            <span style="font-size: 0.9rem;">${data.comment.body}</span>
+                        </div>
+                    </div>`;
+                    
+                document.getElementById('modalCommentsContainer').insertAdjacentHTML('beforeend', newCommentHTML);
+                input.value = ''; 
+                
+                const container = document.getElementById('modalCommentsContainer');
+                container.scrollTop = container.scrollHeight;
+            } else {
+                alert("Lỗi khi đăng bình luận: " + data.error);
+            }
+        })
+        .catch(error => {
+            input.disabled = false;
+            console.error('Lỗi Fetch:', error);
+            alert("Có lỗi mạng xảy ra, vui lòng thử lại!");
         });
-        
-        let newComment = `
-            <div class="d-flex mb-3">
-                <img src="../assets/Profile/C1.jpg" class="rounded-circle me-2 border" width="32" height="32" style="object-fit: cover;">
-                <div><span class="fw-bold me-1" style="font-size: 0.9rem;">Bạn</span><span style="font-size: 0.9rem;">${text}</span></div>
-            </div>`;
-        document.getElementById('modalCommentsContainer').insertAdjacentHTML('beforeend', newComment);
-        input.value = ''; 
-        
-        const container = document.getElementById('modalCommentsContainer');
-        container.scrollTop = container.scrollHeight;
     }
   </script>
 </body>
