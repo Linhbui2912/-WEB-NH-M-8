@@ -1,3 +1,8 @@
+<?php 
+declare(strict_types=1); 
+require_once __DIR__ . '/../models/homepage_helpers.php'; 
+$activeNav = 'create'; $assetPrefix = '../'; 
+?>
 <!doctype html>
 <html lang="vi">
   <head>
@@ -12,72 +17,12 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/css/styles.css" />
+     <link rel="stylesheet" href="<?= hp_h($assetPrefix) ?>assets/css/homepage.css">
   </head>
   <body>
     <div class="container-fluid px-0">
       <div class="row g-0">
-        <aside class="left-sidebar col-2 col-md-1">
-          <a
-            class="sidebar-logo mb-4"
-            href="homepage.php"
-            data-bs-toggle="tooltip"
-            data-bs-title="Trang chủ PawConnect"
-          >
-            <img
-              src="../assets/icon/PawsConnect.png"
-              alt="PawConnect Logo"
-            />
-          </a>
-          <nav class="sidebar-nav">
-            <a
-              href="homepage.php"
-              class="nav-icon"
-              data-bs-toggle="tooltip"
-              data-bs-title="Home"
-              ><img src="../assets/icon/home_5973558.png" alt="Home"
-            /></a>
-            <a
-              href="../controllers/SearchController.php"
-              class="nav-icon"
-              data-bs-toggle="tooltip"
-              data-bs-title="Search"
-              ><img src="../assets/icon/search.png" alt="Search"
-            /></a>
-            <a
-              href="../controllers/dc_discover_controller.php"
-              class="nav-icon"
-              data-bs-toggle="tooltip"
-              data-bs-title="Discover"
-              ><img
-                src="../assets/icon/discovery_12028921.png"
-                alt="Discover"
-            /></a>
-            <!--  data-bs-toggle="modal"
-            data-bs-target="#createPostModal" -->
-            <a
-              href="../controllers/displaycreatepost.php"
-              class="nav-icon active"
-              data-bs-toggle="modal"
-              data-bs-target="#createPostModal"
-              ><img src="../assets/icon/add.png" alt="Create"
-            /></a>
-            <a
-              href="profile.php"
-              class="nav-icon"
-              data-bs-toggle="tooltip"
-              data-bs-title="User Account"
-              ><img src="../assets/icon/user.png" alt="Account"
-            /></a>
-          </nav>
-          <a
-            href="settings.php"
-            class="nav-icon settings-icon"
-            data-bs-toggle="tooltip"
-            data-bs-title="Settings"
-            ><img src="../assets//icon/setting.png" alt="Settings"
-          /></a>
-        </aside>
+       <div class="row g-0"> <?php require __DIR__ . '/partials/homepage/sidebar.php'; ?>
 
         <section
           class="col d-flex justify-content-center align-items-center vh-100"
@@ -260,7 +205,8 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/main.js"></script>    
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/settings.js"></script>
     <script>
     // 1. Lấy các phần tử HTML cần thiết
     const imageInput = document.getElementById('imageInput');
@@ -409,6 +355,8 @@
                   // Thực hiện bắn request đi ngầm dưới nền
                   xhr.send();
               });
+              const modal = new bootstrap.Modal(createPostModal);
+              modal.show();
           }
       // Xử lý Dropdown trạng thái hiển thị bài đăng 
     const privacyItems = document.querySelectorAll('.dropdown-privacy-item');
