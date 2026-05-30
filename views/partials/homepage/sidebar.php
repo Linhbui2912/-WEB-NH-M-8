@@ -21,13 +21,13 @@ $navItem = static function (string $href, string $img, string $tooltip, string $
 
   <nav class="sidebar-nav">
     <?php $navItem('homepage.php', 'home_5973558.png', 'Home', 'home'); ?>
-    <?php $navItem('search.php', 'search.png', 'Search', 'search'); ?>
-    <?php $navItem('discover.php', 'discovery_12028921.png', 'Discover', 'discover'); ?>
-    <?php $navItem('displaycreatepost.php', 'add.png', 'Create New Post', 'create'); ?>
+    <?php $navItem('../controllers/SearchController.php', 'search.png', 'Search', 'search'); ?>
+    <?php $navItem('../controllers/dc_discover_controller.php', 'discovery_12028921.png', 'Discover', 'discover'); ?>
+    <?php $navItem('create-post.php', 'add.png', 'Create New Post', 'create'); ?>
     <?php $navItem('profile.php', 'user.png', 'User Account', 'profile'); ?>
   </nav>
 
-  <a href="settings.php" class="nav-icon settings-icon<?= $activeNav === 'settings' ? ' active' : '' ?>" data-bs-toggle="tooltip" data-bs-title="Settings">
+  <a id="btnOpenSettings"  type="button" class="nav-icon settings-icon<?= $activeNav === 'settings' ? ' active' : '' ?>" data-bs-toggle="tooltip" data-bs-title="Settings">
     <img src="<?= hp_h($icon('setting.png')) ?>" alt="Settings">
   </a>
 </aside>

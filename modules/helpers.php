@@ -93,3 +93,13 @@ function profile_page_url(?string $username = null, ?string $userId = null): str
     }
     return 'profile.php';
 }
+/**
+ * Trả về base URL của project (không có trailing slash)
+ * Hoạt động đúng dù chạy từ localhost:3000 hay subfolder
+ */
+function project_base_url(): string
+{
+    $scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+    $host   = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    return $scheme . '://' . $host;
+}

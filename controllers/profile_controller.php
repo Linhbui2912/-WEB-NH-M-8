@@ -65,5 +65,7 @@ final class ProfileController
         $activeNav = 'profile';
         $viewerIdForView = $viewerId;
         require __DIR__ . '/../views/profile_view.php';
+        // Cuối file profile_controller.php - chỉ define class, không gọi gì
+// Class ProfileController được define ở trên
     }
 }
