@@ -41,6 +41,13 @@
 
     <div class="container" style="max-width: 450px;">
         
+        <?php if(isset($_GET['msg']) && $_GET['msg'] == "locked"): ?>
+            <div id="locked-alert" class="alert alert-danger text-center mb-4 rounded-3 shadow-sm" role="alert">
+                <i class="bi bi-x-octagon-fill me-2"></i>
+                Tài khoản của bạn đã bị khóa do vi phạm tiêu chuẩn cộng đồng!
+            </div>
+        <?php endif; ?>
+
         <?php if(isset($_GET['msg']) && $_GET['msg'] == "login-fail"): ?>
             <div id="error-alert" class="alert alert-danger text-center mb-4 rounded-3 shadow-sm" role="alert">
                 <i class="bi bi-exclamation-triangle-fill me-2"></i>
@@ -113,27 +120,26 @@
         // Chọn các khối alert thông báo lỗi
         const errorAlert = document.getElementById('error-alert');
         const requiredAlert = document.getElementById('required-alert');
+        const lockedAlert = document.getElementById('locked-alert'); // Thêm alert báo khóa
+        
         // Chọn nút xóa form
         const btnClear = document.getElementById('btn-clear');
+        
         //Hàm ẩn các thông báo alert
         function hideAlerts() {
             if (errorAlert) errorAlert.style.display = 'none';
             if (requiredAlert) requiredAlert.style.display = 'none';
+            if (lockedAlert) lockedAlert.style.display = 'none'; // Ẩn luôn cảnh báo khóa
         }
+        
         // Lặp qua từng ô nhập liệu để lắng nghe hành động của người dùng
         inputs.forEach(input => {
             // Sự kiện 'input' kích hoạt ngay khi người dùng gõ phím hoặc click thay đổi dữ liệu
             input.addEventListener('input', () => {
-                // Nếu khối thông báo đăng nhập sai đang tồn tại thì ẩn nó đi
-                if (errorAlert) {
-                    errorAlert.style.display = 'none';
-                }
-                // Tương tự cho thông báo yêu cầu đăng nhập
-                if (requiredAlert) {
-                    requiredAlert.style.display = 'none';
-                }
+                hideAlerts(); // Ẩn hết tất cả alert khi người dùng bắt đầu nhập lại
             });            
         });
+        
         // Xử lý sự kiện click vào nút "Xóa form"
             if (btnClear) {
             btnClear.addEventListener('click', function() {

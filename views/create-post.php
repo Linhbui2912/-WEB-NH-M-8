@@ -38,14 +38,14 @@
               ><img src="../assets/icon/home_5973558.png" alt="Home"
             /></a>
             <a
-              href="search.php"
+              href="../controllers/SearchController.php"
               class="nav-icon"
               data-bs-toggle="tooltip"
               data-bs-title="Search"
               ><img src="../assets/icon/search.png" alt="Search"
             /></a>
             <a
-              href="discover.php"
+              href="../controllers/dc_discover_controller.php"
               class="nav-icon"
               data-bs-toggle="tooltip"
               data-bs-title="Discover"

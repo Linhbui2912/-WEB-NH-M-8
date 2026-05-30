@@ -1,5 +1,5 @@
 <?php
-// BÍ QUYẾT TỪ FILE CŨ: Mảng 22 file ảnh cún mèo chuẩn xác
+
 $localPetImages = [
     'C1.1.jpg', 'C1.2.jpg', 'C1.3.jpg', 'C1.4.jpg', 'C1.5.jpg', 'C1.6.jpg', 'C1.7.jpg', 'C1.8.jpg',
     'C2.1.jpg', 'C5.1.jpg', 'C5.2.jpg',
@@ -13,14 +13,14 @@ if (!empty($danhSachBaiDang)) {
         $chosenImage = $localPetImages[$imgIndex % count($localPetImages)];
         $p['duongDan_fixed'] = $chosenImage;
         
-        // Xử lý đuôi ảnh avatar
+    
         $ava = $p['anhDaiDien'] ?? '';
         if ($ava !== '' && !preg_match('/\.(jpg|jpeg|png|gif)$/i', $ava)) {
             $ava .= '.jpg';
         }
-        $p['anhDaiDien_fixed'] = $ava ?: 'C1.jpg'; // Mặc định C1.jpg theo đúng folder Profile của bạn
+        $p['anhDaiDien_fixed'] = $ava ?: 'C1.jpg'; 
         
-        // Tạo sẵn mảng rỗng để lưu comment riêng cho từng bài
+       
         $p['comments'] = [];
         
         $imgIndex++;
@@ -39,17 +39,41 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body { background-color: #fafafa; }
-    .left-sidebar { padding-top: 30px; border-right: 1px solid #efefef; background: #fff; min-height: 100vh; position: fixed; width: 80px; z-index: 1000; }
-    .sidebar-logo img { width: 40px; display: block; margin: 0 auto; }
-    .sidebar-nav .nav-icon img, .settings-icon img { width: 26px; height: 26px; display: block; margin: 25px auto; transition: transform 0.2s;}
-    .sidebar-nav .nav-icon:hover img { transform: scale(1.1); }
-    .feed-wrapper { margin-left: 80px; padding-bottom: 50px; }
     
+
+    .left-sidebar { 
+        padding-top: 30px; 
+        border-right: 1px solid #efefef; 
+        background: #fff; 
+        min-height: 100vh; 
+        position: fixed; 
+        width: 80px; 
+        z-index: 1000; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+    }
+    .sidebar-logo img { width: 40px; display: block; }
+    
+    /* ĐÃ SỬA: Thêm flex-grow và justify-content để căn giữa menu */
+    .sidebar-nav { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 35px; 
+        width: 100%; 
+        align-items: center; 
+        flex-grow: 1; 
+        justify-content: center; 
+    }
+    
+    .sidebar-nav .nav-icon img, .settings-icon img { width: 26px; height: 26px; display: block; transition: transform 0.2s;}
+    .sidebar-nav .nav-icon:hover img, .settings-icon:hover img { transform: scale(1.1); }
+    
+    .feed-wrapper { margin-left: 80px; padding-bottom: 50px; }
     .explore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
     .explore-item { display: block; position: relative; aspect-ratio: 1 / 1; overflow: hidden; border: none; padding: 0; cursor: pointer;}
     .explore-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
     
-    /* FIX LỖI NÚT CHUYỂN BÀI: Thêm pointer-events: auto */
     .modal-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.9); border: none; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; z-index: 1070; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: all 0.2s; pointer-events: auto; }
     .modal-nav-btn:hover { background: rgba(255, 255, 255, 1); transform: translateY(-50%) scale(1.05); }
     .modal-prev { left: -65px; } .modal-next { right: -65px; }
@@ -75,17 +99,18 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
   <div class="container-fluid px-0">
     <div class="row g-0">
       <aside class="left-sidebar">
-        <a class="sidebar-logo mb-4" href="homepage.php" data-bs-toggle="tooltip" data-bs-title="Trang chủ PawConnect">
+        <a class="sidebar-logo mb-4" href="../views/homepage.php" data-bs-toggle="tooltip" data-bs-title="Trang chủ PawConnect">
             <img src="../assets/icon/PawsConnect.png" alt="PawConnect Logo" />
         </a>
         <nav class="sidebar-nav">
-            <a href="homepage.php" class="nav-icon"><img src="../assets/icon/home_5973558.png" alt="Home" /></a>
-            <a href="search.php" class="nav-icon"><img src="../assets/icon/search.png" alt="Search" /></a>
+            <a href="../views/homepage.php" class="nav-icon"><img src="../assets/icon/home_5973558.png" alt="Home" /></a>
+            <a href="../controllers/SearchController.php" class="nav-icon"><img src="../assets/icon/search.png" alt="Search" /></a>
             <a href="../controllers/dc_discover_controller.php" class="nav-icon active"><img src="../assets/icon/discovery_12028921.png" alt="Discover" /></a>
-            <a href="create-post.php" class="nav-icon"><img src="../assets/icon/add.png" alt="Create" /></a>
-            <a href="profile.php" class="nav-icon"><img src="../assets/icon/user.png" alt="Account" /></a>
+            <a href="../views/create-post.php" class="nav-icon"><img src="../assets/icon/add.png" alt="Create" /></a>
+            <a href="../views/profile.php" class="nav-icon"><img src="../assets/icon/user.png" alt="Account" /></a>
         </nav>
-        <a href="settings.php" class="nav-icon settings-icon">
+        
+        <a id="btnOpenSettings"  type="button" class="nav-icon settings-icon mt-auto mb-4">
             <img src="../assets/icon/setting.png" alt="Settings" />
         </a>
       </aside>
@@ -126,17 +151,21 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
           <div class="col-md-5 d-flex flex-column bg-white" style="height: 100%; max-height: 90vh;">
             
             <div class="p-3 border-bottom d-flex align-items-center">
-              <img id="modalHeaderAvatar" src="" class="rounded-circle me-2 border" width="32" height="32" style="object-fit: cover;">
-              <div class="d-flex align-items-center flex-grow-1">
-                <span id="modalHeaderName" class="fw-bold" style="font-size: 0.9rem;"></span>
-              </div>
+              <a id="modalHeaderProfileLink" href="#" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                  <img id="modalHeaderAvatar" src="" class="rounded-circle me-2 border" width="32" height="32" style="object-fit: cover;">
+                  <span id="modalHeaderName" class="fw-bold" style="font-size: 0.9rem;"></span>
+              </a>
             </div>
 
             <div class="p-3 flex-grow-1 overflow-auto ig-scrollbar" style="min-height: 250px;">
                 <div class="d-flex mb-3">
-                    <img id="modalAvatarCap" src="" class="rounded-circle me-2 border" width="32" height="32" style="object-fit: cover;">
+                    <a id="modalCapProfileLink" href="#" style="text-decoration: none; color: inherit;">
+                        <img id="modalAvatarCap" src="" class="rounded-circle me-2 border" width="32" height="32" style="object-fit: cover;">
+                    </a>
                     <div>
-                        <span class="fw-bold me-1" id="modalCaptionUser" style="font-size: 0.9rem;"></span>
+                        <a id="modalCapNameLink" href="#" style="text-decoration: none; color: inherit;">
+                            <span class="fw-bold me-1" id="modalCaptionUser" style="font-size: 0.9rem;"></span>
+                        </a>
                         <span id="modalCaption" style="font-size: 0.9rem;"></span>
                     </div>
                 </div>
@@ -188,7 +217,8 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  
+    <script src="../assets/js/settings.js"></script>
+
   <script>
     const postsDataEl = document.getElementById('postsData');
     const postsArray = JSON.parse(postsDataEl.getAttribute('data-json') || '[]');
@@ -200,7 +230,6 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         reportModalInstance = new bootstrap.Modal(document.getElementById('reportModal'), { backdrop: false });
     });
 
-    // FIX BÀN PHÍM: Cho phép bấm mũi tên trái phải để chuyển bài
     document.addEventListener('keydown', function(event) {
       if (currentIndex !== -1 && document.getElementById('postDetailModal').classList.contains('show')) {
         if (event.key === 'ArrowRight' || event.key === '>') nextPost();
@@ -215,7 +244,6 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
 
         document.getElementById('modalMainImg').src = '../assets/Posts/' + data.duongDan_fixed;
         
-        // FIX LỖI ẢNH AVATAR: Xử lý an toàn với onerror bằng Javascript
         let avaSrc = '../assets/Profile/' + data.anhDaiDien_fixed;
         let imgHeader = document.getElementById('modalHeaderAvatar');
         let imgCap = document.getElementById('modalAvatarCap');
@@ -230,11 +258,15 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         document.getElementById('modalCaption').innerText = data.noiDung || '';
         document.getElementById('modalLikes').innerText = data.soLuotPaw + ' lượt paw';
 
+        // ĐÃ SỬA: Chèn link profile tự động thông qua Javascript dựa trên tenDangNhap
+        let profileUrl = '../views/profile.php?user=' + encodeURIComponent(data.tenDangNhap);        document.getElementById('modalHeaderProfileLink').href = profileUrl;
+        document.getElementById('modalCapProfileLink').href = profileUrl;
+        document.getElementById('modalCapNameLink').href = profileUrl;
+
         const likeIcon = document.getElementById('modalLikeIcon');
         likeIcon.src = '../assets/icon/footprint.png';
         likeIcon.setAttribute('data-liked', 'false');
 
-        // FIX LỖI COMMENT: Dọn sạch bình luận cũ, chỉ load bình luận của bài này
         const commentsContainer = document.getElementById('modalCommentsContainer');
         commentsContainer.innerHTML = ''; 
         if (data.comments && data.comments.length > 0) {
@@ -314,19 +346,16 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         });
     }
 
-    // FIX LỖI COMMENT LƯU SAI CHỖ
     function addComment() {
         const input = document.getElementById('commentInput');
         const text = input.value.trim();
         if (text === '') return; 
         
-        // Lưu thẳng vào mảng data để giữ lại cho riêng bài viết này
         postsArray[currentIndex].comments.push({
             username: 'Bạn',
             text: text
         });
         
-        // Hiển thị ra màn hình
         let newComment = `
             <div class="d-flex mb-3">
                 <img src="../assets/Profile/C1.jpg" class="rounded-circle me-2 border" width="32" height="32" style="object-fit: cover;">
@@ -335,7 +364,6 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         document.getElementById('modalCommentsContainer').insertAdjacentHTML('beforeend', newComment);
         input.value = ''; 
         
-        // Cuộn xuống cuối để thấy bình luận mới
         const container = document.getElementById('modalCommentsContainer');
         container.scrollTop = container.scrollHeight;
     }
