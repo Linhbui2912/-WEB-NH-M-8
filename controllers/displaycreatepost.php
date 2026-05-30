@@ -20,7 +20,7 @@ $thongTinHoSo = $postModel->getProfileByUserId($link, $maNguoiDung);
 
 // Định nghĩa dữ liệu mặc định phòng hờ
 $tenHienThi = "Người dùng PawConnect";
-$anhDaiDien = "../assets/Profile/default-avatar.jpg"; 
+$anhDaiDien = "../assets/Profile/default_avatar.jpg"; 
 
 if ($thongTinHoSo) {
     // Sử dụng đúng 2 Key chữ HOA (tenHienThi, anhDaiDien) đã debug ra
@@ -28,7 +28,7 @@ if ($thongTinHoSo) {
         $tenHienThi = $thongTinHoSo['tenHienThi'];
     }
     if (!empty($thongTinHoSo['anhDaiDien'])) {
-        $anhDaiDien = "../assets/Profile/" . $thongTinHoSo['anhDaiDien'];
+        $anhDaiDien = "../assets/uploads/" . $thongTinHoSo['anhDaiDien'];
     }
 }
 giaiPhongBoNho($link, null);
