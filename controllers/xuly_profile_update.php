@@ -26,7 +26,7 @@ if ($tenHienThi === '') {
 }
 
 if (isset($_FILES['anhDaiDien']) && $_FILES['anhDaiDien']['error'] === UPLOAD_ERR_OK) {
-    $uploadDir = dirname(__DIR__) . '/assets/uploads/';
+    $uploadDir = dirname(__DIR__) . '/assets/Profile/';
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0777, true);
     }
