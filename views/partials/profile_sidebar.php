@@ -18,7 +18,7 @@ $isHomePage = str_contains($_SERVER['REQUEST_URI'], 'homepage');
     <a href="../controllers/SearchController.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Search">
       <img src="<?= h($icon('search.png')) ?>" alt="Search" />
     </a>
-    <a href="#" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Discover">
+    <a href="../controllers/dc_discover_controller.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Discover">
       <img src="<?= h($icon('discovery_12028921.png')) ?>" alt="Discover" />
     </a>
     <a href="../views/create-post.php" class="nav-icon" data-bs-toggle="tooltip" data-bs-title="Create">
@@ -32,3 +32,4 @@ $isHomePage = str_contains($_SERVER['REQUEST_URI'], 'homepage');
     <img src="<?= h($icon('setting.png')) ?>" alt="Settings" />
   </button>
 </aside>
+
