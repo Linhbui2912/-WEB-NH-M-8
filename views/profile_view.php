@@ -126,7 +126,7 @@ $profileTitle = $profile ? (string) $profile['tenDangNhap'] : 'Profile';
                         </section>
 
                         <?php if (!$isOwnProfile): ?>
-                        <section class="mb-4 profile-actions px-1">
+                        <section class="mb-4 profile-actions px-1 ">
                             <div class="d-flex gap-2">
                                 <button type="button"
                                         class="btn btn-follow flex-fill <?= $isFollowing ? 'following' : '' ?>"
@@ -156,8 +156,43 @@ $profileTitle = $profile ? (string) $profile['tenDangNhap'] : 'Profile';
                                     <p class="mb-0">Chưa có bài đăng công khai nào.</p>
                                 </div>
                             <?php else: ?>
-                                <?php foreach ($posts as $post): ?>
-                                <div class="col-6 col-md-3 profile-post-col">
+                                    <?php foreach ($posts as $post): ?>
+                                <div class="col-6 col-md-3 profile-post-col position-relative">
+
+                                <?php if ($isOwnProfile): ?>
+                                    <div class="dropdown position-absolute top-0 end-0 m-2" style="z-index: 10;">
+                                        <button class="btn btn-dark btn-sm rounded-circle opacity-75 border-0 p-1 d-flex align-items-center justify-content-center" 
+                                                type="button" 
+                                                data-bs-toggle="dropdown" 
+                                                aria-expanded="false"
+                                                style="width: 28px; height: 28px;">
+                                            <span style="line-height: 0; font-size: 14px; color: #fff;">•••</span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                            <li>
+                                                <button type="button" 
+                                                        class="dropdown-item btn-edit-post" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#editPostModal"
+                                                        data-post-id="<?= h($post['maBaiDang']) ?>"
+                                                        data-post-content="<?= h($post['noiDung'] ?? '') ?>"
+                                                        data-post-image="<?= h(post_image_url($post['duongDan'])) ?>">
+                                                    Chỉnh sửa bài viết
+                                                </button>
+                                            </li>
+                                            <li>
+                                            <button type="button" 
+                                                class="dropdown-item text-danger"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#confirmDeleteModal"
+                                                data-post-id="<?= h($post['maBaiDang']) ?>">
+                                            Xóa bài viết
+                                        </button>
+                                        </li>
+                                        </ul>
+                                    </div>
+                                    <?php endif; ?>
+
                                     <button type="button"
                                             class="post-item w-100 border-0 p-0"
                                             style="overflow:hidden;display:block;"
@@ -182,11 +217,134 @@ $profileTitle = $profile ? (string) $profile['tenDangNhap'] : 'Profile';
     </div>
 
     <?php require __DIR__ . '/partials/profile_modals.php'; ?>
-
+    <?php require __DIR__ . '/partials/editpostmodal.php'; ?>
+    <?php require __DIR__ . '/partials/deletepostmodal.php'; ?>
+                                    
     <div class="toast-container position-fixed bottom-0 end-0 p-3" id="profileToastWrap"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= h(asset_url('js/profile.js')) ?>"></script>
+    <script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const editPostModal = document.getElementById('editPostModal');
+
+    if (editPostModal) {
+
+        // Lắng nghe hành vi mở modal tự động từ Bootstrap 5
+
+        editPostModal.addEventListener('show.bs.modal', function (event) {
+
+            // 1. Xác định nút 3 chấm vừa được click
+
+            const button = event.relatedTarget;           
+
+            // 2. Đọc các giá trị dữ liệu từ thuộc tính data-* của nút đó
+
+            const postId = button.getAttribute('data-post-id');
+
+            const postContent = button.getAttribute('data-post-content');
+
+            const postImage = button.getAttribute('data-post-image'); // Lấy đường dẫn ảnh từ Profile truyền sang
+
+
+
+            // 3. Tìm các thành phần đích bên trong editpostmodal.php để đổ dữ liệu vào
+
+            const inputId = editPostModal.querySelector('#editPostId');
+
+            const textareaContent = editPostModal.querySelector('#editPostContent');
+
+            const carouselInner = editPostModal.querySelector('#editCarouselPreviewItems');
+
+            const carouselContainer = editPostModal.querySelector('#editImageCarouselPreview');
+
+            const deleteBtn = editPostModal.querySelector('#editDeleteBtn');
+
+            // 4. Điền thông tin chữ vào Form
+
+            inputId.value = postId;
+
+            textareaContent.value = postContent;
+
+
+            // 5. Xử lý hiển thị hình ảnh vào Carousel
+
+            // Reset lại Carousel cũ tránh bị cộng dồn ảnh của bài viết bấm trước đó
+
+            carouselInner.innerHTML = '';
+
+
+            if (postImage && postImage.trim() !== '' && !postImage.includes('default-placeholder')) {
+
+                // Nếu bài viết có ảnh hợp lệ, tạo cấu trúc item ảnh cho Bootstrap Carousel
+
+                const carouselItem = `
+
+                    <div class="carousel-item active">
+
+                        <img src="${postImage}" class="d-block w-100" alt="Ảnh bài viết">
+
+                    </div>
+
+                `;
+
+                // Chèn ảnh vào trong lòng Carousel
+
+                carouselInner.innerHTML = carouselItem;              
+
+                // Kích hoạt hiển thị khung Carousel và nút xóa ảnh
+
+                carouselContainer.style.display = 'block';
+
+                carouselInner.classList.add('edit-has-images');
+
+                if (deleteBtn) deleteBtn.style.display = 'block';
+
+            } else {
+
+                // Nếu bài viết chỉ có chữ (không có ảnh), ẩn toàn bộ khung Carousel đi
+
+                carouselContainer.style.display = 'none';
+
+                carouselInner.classList.remove('edit-has-images');
+
+                if (deleteBtn) deleteBtn.style.display = 'none';
+
+            }
+
+        });
+
+    }
+    const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+
+if (confirmDeleteModal) {
+    // 1. Khi modal hiện lên -> bắt ID từ nút 3 chấm truyền vào input ẩn của form
+    confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget; 
+        const postId = button.getAttribute('data-post-id'); 
+
+        const hiddenInput = document.getElementById('hiddenDeletePostId');
+        if (hiddenInput) {
+            hiddenInput.value = postId;
+        }
+    });
+
+    // 2. Khi nhấn nút "Xóa" màu đỏ -> submit form trực tiếp sang controller
+    const btnConfirmDeleteExecute = document.getElementById('btnConfirmDeleteExecute');
+    if (btnConfirmDeleteExecute) {
+        btnConfirmDeleteExecute.addEventListener('click', function () {
+            const hiddenForm = document.getElementById('hiddenDeletePostForm');
+            if (hiddenForm) {
+                hiddenForm.submit(); 
+            }
+        });
+    }
+}
+});
+
+    </script>
     <script src="<?= h(asset_url('js/settings.js')) ?>"></script>
 </body>
 </html>
