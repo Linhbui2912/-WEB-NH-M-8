@@ -69,5 +69,3 @@ final class ProfileController
 // Class ProfileController được define ở trên
     }
 }
-
-ProfileController::show();
