@@ -45,5 +45,35 @@ class PostModel {
                 VALUES ('$phuongTien->maPhuongTien', '$phuongTien->maBaiDang', '$phuongTien->maNguoiDung', '$phuongTien->duongDan', '$phuongTien->loaiPhuongTien')";   
         return chayTruyVanKhongTraVeDL($link,  $sql_pt);
     }
+      // Hàm cập nhật nội dung chữ và chế độ hiển thị bài viết
+    public function updatePost($link, BaiDang $baiDang) {
+        // Làm sạch dữ liệu để tránh lỗi SQL Injection
+        $maBaiDang    = mysqli_real_escape_string($link, $baiDang->maBaiDang);
+        $noiDung      = mysqli_real_escape_string($link, $baiDang->noiDung);
+        $cheDoHienThi = mysqli_real_escape_string($link, $baiDang->cheDoHienThi);
+
+        $sql_update = "UPDATE BaiDang 
+                       SET noiDung = '$noiDung', cheDoHienThi = '$cheDoHienThi' 
+                       WHERE maBaiDang = '$maBaiDang'";
+
+        // Sử dụng hàm bổ trợ không trả về dữ liệu của bạn
+        return chayTruyVanKhongTraVeDL($link, $sql_update);
+    }
+
+    // 2. Hàm xóa toàn bộ phương tiện (hình ảnh/video) cũ thuộc bài viết
+    public function deleteMedia($link, $maBaiDang) {
+        $maBaiDang = mysqli_real_escape_string($link, $maBaiDang);
+
+        $sql_delete = "DELETE FROM PhuongTien WHERE maBaiDang = '$maBaiDang'";
+
+        return chayTruyVanKhongTraVeDL($link, $sql_delete);
+    }
+    // 3. Hàm xóa bài đăng khỏi bảng BaiDang
+    public function deletePost($link, $maBaiDang) {
+        $maBaiDang = mysqli_real_escape_string($link, $maBaiDang);
+        $sql = "DELETE FROM BaiDang WHERE maBaiDang = '$maBaiDang'";
+        
+        return chayTruyVanKhongTraVeDL($link, $sql);
+    }
 }
 ?>

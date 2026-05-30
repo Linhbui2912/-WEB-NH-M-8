@@ -23,7 +23,7 @@ $navItem = static function (string $href, string $img, string $tooltip, string $
     <?php $navItem('homepage.php', 'home_5973558.png', 'Home', 'home'); ?>
     <?php $navItem('search.php', 'search.png', 'Search', 'search'); ?>
     <?php $navItem('discover.php', 'discovery_12028921.png', 'Discover', 'discover'); ?>
-    <?php $navItem('displaycreatepost.php', 'add.png', 'Create New Post', 'create'); ?>
+    <?php $navItem('create-post.php', 'add.png', 'Create New Post', 'create'); ?>
     <?php $navItem('profile.php', 'user.png', 'User Account', 'profile'); ?>
   </nav>
 
