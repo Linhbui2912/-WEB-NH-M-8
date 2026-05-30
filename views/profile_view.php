@@ -138,6 +138,16 @@ $profileTitle = $profile ? (string) $profile['tenDangNhap'] : 'Profile';
                                 <button type="button" class="btn btn-pet flex-fill">Vuốt ve 🐾</button>
                             </div>
                         </section>
+                        <?php else: ?>
+<section class="mb-4 profile-actions px-1">
+    <div class="d-flex gap-2">
+        <button type="button"
+                class="btn btn-dark flex-fill rounded-3 py-2"
+                id="btnOpenEditProfile">
+            Chỉnh sửa trang cá nhân
+        </button>
+    </div>
+</section>
                         <?php endif; ?>
 
                         <section class="row g-2 profile-posts" id="profileGrid">
@@ -177,5 +187,6 @@ $profileTitle = $profile ? (string) $profile['tenDangNhap'] : 'Profile';
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= h(asset_url('js/profile.js')) ?>"></script>
+    <script src="<?= h(asset_url('js/settings.js')) ?>"></script>
 </body>
 </html>

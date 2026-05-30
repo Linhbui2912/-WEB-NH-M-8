@@ -26,8 +26,9 @@ $apiControllers = '../controllers/';
                         <?php require __DIR__ . '/partials/homepage/post_card.php'; ?> 
                         <?php endforeach; ?> <?php endif; ?> </section> </main> </div> </div> 
                         <?php require __DIR__ . '/partials/homepage/post_detail_modal.php'; ?> 
-                        <?php require __DIR__ . '/partials/homepage/report_modal.php'; ?> 
+                        <?php require __DIR__ . '/partials/homepage/report_modal.php'; ?>
                         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
                         <script src="<?= hp_h($assetPrefix) ?>assets/js/homepage.js"></script> 
+                        <script src="<?= hp_h($assetPrefix) ?>assets/js/settings.js"></script>
 </body> 
 </html>

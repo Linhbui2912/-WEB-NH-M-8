@@ -141,39 +141,6 @@ $accountReportReasons = [
 </div>
 
 <?php if ($isOwnProfile): ?>
-<!-- Modal cài đặt -->
-<div class="modal fade" id="settingsMenuModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 rounded-4 shadow">
-            <div class="modal-body p-4">
-                <h5 class="text-center fw-bold mb-4">Cài đặt</h5>
-                <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-outline-dark rounded-3 py-2" id="btnOpenEditProfile">Chỉnh sửa trang cá nhân</button>
-                    <button type="button" class="btn btn-outline-danger rounded-3 py-2" id="btnOpenLogoutConfirm">Đăng xuất</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal xác nhận đăng xuất -->
-<div class="modal fade" id="logoutConfirmModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-        <div class="modal-content border-0 rounded-4">
-            <div class="modal-body p-4 text-center">
-                <p class="mb-4">Bạn có chắc muốn đăng xuất?</p>
-                <div class="row g-2">
-                    <div class="col-6">
-                        <a href="../controllers/xulydangxuat.php" class="btn btn-dark w-100 rounded-3">Có</a>
-                    </div>
-                    <div class="col-6">
-                        <button type="button" class="btn btn-secondary w-100 rounded-3" data-bs-dismiss="modal">Không</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Modal chỉnh sửa profile -->
 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-hidden="true">

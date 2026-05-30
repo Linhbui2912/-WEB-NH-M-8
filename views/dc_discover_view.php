@@ -104,13 +104,13 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         </a>
         <nav class="sidebar-nav">
             <a href="../views/homepage.php" class="nav-icon"><img src="../assets/icon/home_5973558.png" alt="Home" /></a>
-            <a href="../views/search.php" class="nav-icon"><img src="../assets/icon/search.png" alt="Search" /></a>
+            <a href="../controllers/SearchController.php" class="nav-icon"><img src="../assets/icon/search.png" alt="Search" /></a>
             <a href="../controllers/dc_discover_controller.php" class="nav-icon active"><img src="../assets/icon/discovery_12028921.png" alt="Discover" /></a>
             <a href="../views/create-post.php" class="nav-icon"><img src="../assets/icon/add.png" alt="Create" /></a>
             <a href="../views/profile.php" class="nav-icon"><img src="../assets/icon/user.png" alt="Account" /></a>
         </nav>
         
-        <a href="../views/settings.php" class="nav-icon settings-icon mt-auto mb-4">
+        <a id="btnOpenSettings"  type="button" class="nav-icon settings-icon mt-auto mb-4">
             <img src="../assets/icon/setting.png" alt="Settings" />
         </a>
       </aside>
@@ -217,7 +217,8 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  
+    <script src="../assets/js/settings.js"></script>
+
   <script>
     const postsDataEl = document.getElementById('postsData');
     const postsArray = JSON.parse(postsDataEl.getAttribute('data-json') || '[]');
@@ -258,8 +259,7 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
         document.getElementById('modalLikes').innerText = data.soLuotPaw + ' lượt paw';
 
         // ĐÃ SỬA: Chèn link profile tự động thông qua Javascript dựa trên tenDangNhap
-        let profileUrl = '../controllers/profile_controller.php?user=' + encodeURIComponent(data.tenDangNhap);
-        document.getElementById('modalHeaderProfileLink').href = profileUrl;
+        let profileUrl = '../views/profile.php?user=' + encodeURIComponent(data.tenDangNhap);        document.getElementById('modalHeaderProfileLink').href = profileUrl;
         document.getElementById('modalCapProfileLink').href = profileUrl;
         document.getElementById('modalCapNameLink').href = profileUrl;
 

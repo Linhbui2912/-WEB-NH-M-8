@@ -7,7 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initPostDetailModal(viewerId, apiBase);
   initFollowFeatures(viewerId, profileId, apiBase);
   initReportModals(apiBase);
-  initSettingsModals(isOwnProfile);
+   document.getElementById('btnOpenEditProfile')?.addEventListener('click', () => {
+    const editModalEl = document.getElementById('editProfileModal');
+    if (!editModalEl) return;
+    const editModal = bootstrap.Modal.getInstance(editModalEl)
+      || new bootstrap.Modal(editModalEl);
+    editModal.show();
+  });
 });
 
 function apiUrl(path, apiBase) {
@@ -51,33 +57,7 @@ async function toggleFollow(followerId, targetId, action, apiBase) {
   return data;
 }
 
-function initSettingsModals(isOwnProfile) {
-  const settingsBtn = document.getElementById('btnOpenSettings');
-  const settingsModalEl = document.getElementById('settingsMenuModal');
-  const logoutModalEl = document.getElementById('logoutConfirmModal');
-  const editModalEl = document.getElementById('editProfileModal');
 
-  if (!settingsBtn || !isOwnProfile) {
-    settingsBtn?.classList.add('d-none');
-    return;
-  }
-
-  const settingsModal = settingsModalEl ? new bootstrap.Modal(settingsModalEl) : null;
-  const logoutModal = logoutModalEl ? new bootstrap.Modal(logoutModalEl) : null;
-  const editModal = editModalEl ? new bootstrap.Modal(editModalEl) : null;
-
-  settingsBtn.addEventListener('click', () => settingsModal?.show());
-
-  document.getElementById('btnOpenLogoutConfirm')?.addEventListener('click', () => {
-    settingsModal?.hide();
-    logoutModal?.show();
-  });
-
-  document.getElementById('btnOpenEditProfile')?.addEventListener('click', () => {
-    settingsModal?.hide();
-    editModal?.show();
-  });
-}
 
 function initReportModals(apiBase) {
   setupReportModal({
@@ -214,13 +194,12 @@ function initFollowFeatures(viewerId, profileId, apiBase) {
                   ${user.viewerFollows ? 'Đang theo dõi' : 'Theo dõi'}
                </button>`;
           return `<li class="follow-list-item">
-              <a href="profile.php?user=${encodeURIComponent(user.tenDangNhap)}" class="follow-list-user">
-                <img src="${escapeHtml(user.avatar)}" alt="" class="follow-list-avatar" />
-                <div class="follow-list-meta">
-                  <span class="follow-list-username">${escapeHtml(user.tenDangNhap)}</span>
-                  <span class="follow-list-name">${escapeHtml(user.tenHienThi)}</span>
-                </div>
-              </a>${actionBtn}</li>`;
+          <a href="profile.php?user=${encodeURIComponent(user.tenDangNhap)}" class="follow-list-user">        <img src="${escapeHtml(user.avatar)}" alt="" class="follow-list-avatar" />
+        <div class="follow-list-meta">
+            <span class="follow-list-username">${escapeHtml(user.tenDangNhap)}</span>
+            <span class="follow-list-name">${escapeHtml(user.tenHienThi)}</span>
+        </div>
+    </a>${actionBtn}</li>`;
         })
         .join('')}</ul>`;
 

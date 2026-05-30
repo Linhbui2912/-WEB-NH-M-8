@@ -38,7 +38,7 @@
               ><img src="../assets/icon/home_5973558.png" alt="Home"
             /></a>
             <a
-              href="search.php"
+              href="../controllers/SearchController.php"
               class="nav-icon"
               data-bs-toggle="tooltip"
               data-bs-title="Search"
