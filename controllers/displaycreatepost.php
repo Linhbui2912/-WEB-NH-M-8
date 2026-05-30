@@ -28,7 +28,7 @@ if ($thongTinHoSo) {
         $tenHienThi = $thongTinHoSo['tenHienThi'];
     }
     if (!empty($thongTinHoSo['anhDaiDien'])) {
-        $anhDaiDien = "../assets/uploads/" . $thongTinHoSo['anhDaiDien'];
+        $anhDaiDien = "../assets/Profile/" . $thongTinHoSo['anhDaiDien'];
     }
 }
 giaiPhongBoNho($link, null);
