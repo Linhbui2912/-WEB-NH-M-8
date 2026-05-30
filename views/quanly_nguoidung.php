@@ -32,7 +32,7 @@
                             <tr class="<?= $user['trangThai'] === 'bi_khoa' ? 'row-alert' : '' ?>">
                                 
                                 <td class="text-blue">
-                                    <a href="../controllers/profile_controller.php?id=<?= htmlspecialchars($user['maNguoiDung']) ?>" target="_blank" style="text-decoration: none; color: inherit;">
+                                    <a href="../views/profile.php?id=<?= htmlspecialchars($user['maNguoiDung']) ?>" target="_blank" style="text-decoration: none; color: inherit;">
                                         <?= htmlspecialchars($user['maNguoiDung']) ?>
                                     </a>
                                 </td>
