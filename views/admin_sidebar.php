@@ -8,7 +8,7 @@
             <img src="../assets/icon/icon_admin_posts.png" alt="Posts">
             <span>Admin/Posts</span>
         </a>
-        <a href="../views/quanly_nguoidung.php" class="nav-item">
+        <a href="../controllers/admin_user_controller.php" class="nav-item">
             <img src="../assets/icon/icon_admin_users.png" alt="Users">
             <span>Admin/Users</span>
         </a>
