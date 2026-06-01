@@ -1,5 +1,6 @@
 <?php
-
+require_once __DIR__ . '/../models/homepage_helpers.php'; 
+$activeNav = 'discover'; $assetPrefix = '../'; 
 $localPetImages = [
     'C1.1.jpg', 'C1.2.jpg', 'C1.3.jpg', 'C1.4.jpg', 'C1.5.jpg', 'C1.6.jpg', 'C1.7.jpg', 'C1.8.jpg',
     'C2.1.jpg', 'C5.1.jpg', 'C5.2.jpg',
@@ -41,37 +42,8 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
   <title>PawConnect - Khám phá</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background-color: #fafafa; }
-    
-
-    .left-sidebar { 
-        padding-top: 30px; 
-        border-right: 1px solid #efefef; 
-        background: #fff; 
-        min-height: 100vh; 
-        position: fixed; 
-        width: 80px; 
-        z-index: 1000; 
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
-    }
-    .sidebar-logo img { width: 40px; display: block; }
-    
-  
-    .sidebar-nav { 
-        display: flex; 
-        flex-direction: column; 
-        gap: 35px; 
-        width: 100%; 
-        align-items: center; 
-        flex-grow: 1; 
-        justify-content: center; 
-    }
-    
-    .sidebar-nav .nav-icon img, .settings-icon img { width: 26px; height: 26px; display: block; transition: transform 0.2s;}
-    .sidebar-nav .nav-icon:hover img, .settings-icon:hover img { transform: scale(1.1); }
-    
+    body { background-color: #fafafa; }  
+       
     .feed-wrapper { margin-left: 80px; padding-bottom: 50px; }
     .explore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
     .explore-item { display: block; position: relative; aspect-ratio: 1 / 1; overflow: hidden; border: none; padding: 0; cursor: pointer;}
@@ -88,35 +60,18 @@ $jsonString = htmlspecialchars(json_encode($safePosts, JSON_UNESCAPED_UNICODE), 
     .btn-pill { border-radius: 20px; padding: 8px 32px; font-size: 14px; }
     
     @media (max-width: 1200px) { .modal-prev { left: 15px; } .modal-next { right: 15px; } }
-    @media (max-width: 768px) {
-        .left-sidebar { width: 60px; padding-top: 20px; }
-        .sidebar-logo img { width: 30px; }
-        .sidebar-nav img, .settings-icon img { width: 22px; }
+    @media (max-width: 768px) {        
         .feed-wrapper { margin-left: 60px; padding: 10px; }
     }
   </style>
+<link rel="stylesheet" href="<?= hp_h($assetPrefix) ?>assets/css/homepage.css">
 </head>
 <body>
   <div id="postsData" data-json="<?= $jsonString ?>" style="display: none;"></div>
 
   <div class="container-fluid px-0">
     <div class="row g-0">
-      <aside class="left-sidebar">
-        <a class="sidebar-logo mb-4" href="../views/homepage.php" data-bs-toggle="tooltip" data-bs-title="Trang chủ PawConnect">
-            <img src="../assets/icon/PawsConnect.png" alt="PawConnect Logo" />
-        </a>
-        <nav class="sidebar-nav">
-            <a href="../views/homepage.php" class="nav-icon"><img src="../assets/icon/home_5973558.png" alt="Home" /></a>
-            <a href="../controllers/SearchController.php" class="nav-icon"><img src="../assets/icon/search.png" alt="Search" /></a>
-            <a href="../controllers/dc_discover_controller.php" class="nav-icon active"><img src="../assets/icon/discovery_12028921.png" alt="Discover" /></a>
-            <a href="../views/create-post.php" class="nav-icon"><img src="../assets/icon/add.png" alt="Create" /></a>
-            <a href="../views/profile.php" class="nav-icon"><img src="../assets/icon/user.png" alt="Account" /></a>
-        </nav>
-        
-        <a id="btnOpenSettings"  type="button" class="nav-icon settings-icon mt-auto mb-4">
-            <img src="../assets/icon/setting.png" alt="Settings" />
-        </a>
-      </aside>
+      <?php require __DIR__ . '/partials/homepage/sidebar.php'; ?>
 
       <main class="feed-wrapper col">
         <div class="container-fluid pt-3 px-4" style="max-width: 900px; margin: 0 auto;">
