@@ -1,7 +1,8 @@
 <?php
 
 declare(strict_types=1);
-
+require_once __DIR__ . '/../models/homepage_helpers.php'; 
+$activeNav = 'profile'; $assetPrefix = '../'; 
 /** @var string|null $error */
 /** @var array<string,mixed>|null $profile */
 /** @var list<array<string,mixed>> $posts */
@@ -33,8 +34,8 @@ $profileTitle = $profile ? (string) $profile['tenDangNhap'] : 'Profile';
     data-api-base="../controllers/"
 >
     <div class="profile-page container-fluid px-0">
-        <div class="row g-0 min-vh-100 flex-nowrap">
-            <?php require __DIR__ . '/partials/profile_sidebar.php'; ?>
+       <div class="row g-0 flex-nowrap">
+            <?php require __DIR__ . '/partials/homepage/sidebar.php'; ?>
 
             <main class="profile-main col col-md-11">
                 <div class="container py-4">
@@ -346,5 +347,6 @@ if (confirmDeleteModal) {
 
     </script>
     <script src="<?= h(asset_url('js/settings.js')) ?>"></script>
+    <link rel="stylesheet" href="<?= hp_h($assetPrefix) ?>assets/css/homepage.css">
 </body>
 </html>
