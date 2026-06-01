@@ -16,32 +16,22 @@ Dự án hướng đến việc hình thành một cộng đồng tích cực, n
 
 ##  2. Điểm Khác Biệt
 
-###  2.1. Hệ thống hồ sơ kép 
-Khác với mô hình truyền thống (1 tài khoản = 1 người dùng), hệ thống cho phép:
-- Hồ sơ linh hoạt: Một tài khoản người dùng có thể quản lý nhiều hồ sơ thú cưng.
-- Định danh riêng biệt: Mỗi hồ sơ thú cưng có thông tin định danh riêng: *Tên, loài, giống, tuổi*.
-- Gắn kết nội dung: Bài đăng được gắn trực tiếp với từng thú cưng cụ thể.
-  - *Ví dụ: “Nguyễn Văn A vừa đăng ảnh của Banh Bao (Mèo)”* -  Giá trị: Tăng tính cá nhân hóa và tạo cảm giác mỗi thú cưng là một "nhân vật" riêng biệt với câu chuyện riêng.
 
-###  2.2. Trải nghiệm UI/UX cá nhân hóa
+###  2.1. Trải nghiệm UI/UX cá nhân hóa
 - Newsfeed tập trung: Bảng tin hiển thị 100% nội dung về thế giới thú cưng.
 - Tương tác đặc trưng:  Thay thế nút “Like” truyền thống bằng biểu tượng “Paw” 🐾.
-  - Biểu tượng tương tác riêng theo từng loại thú (Xương 🦴 cho chó, Cá 🐟 cho mèo,...).
 -  Giá trị: Tăng nhận diện thương hiệu và tạo trải nghiệm thú vị, khác biệt hoàn toàn so với các MXH phổ thông.
 
 ##  3. Phân rã chức năng hệ thống
 
-###  3.1. Mức cơ bản (Core Features)
+###  3.1. Tính năng chính
 * Quản lý định danh:Đăng ký / Đăng nhập.
     * Tạo, xem, cập nhật hồ sơ thú cưng (CRUD Pet Profiles).
 *  Bảng tin (Newsfeed): Hiển thị bài đăng theo thời gian thực hoặc mức độ tương tác.
-    * Thuật toán hiển thị ưu tiên các thú cưng được gắn thẻ (tag).
 *  Tương tác xã hội: Đăng tải hình ảnh/video kèm mô tả sinh động.
     * Thả “Paw” 🐾 và để lại bình luận dưới mỗi bài đăng.
 *  Hệ thống theo dõi: Theo dõi (Follow) / Bỏ theo dõi (Unfollow) người dùng khác.
     * Ưu tiên hiển thị nội dung từ các tài khoản đã theo dõi trên bảng tin.
 
-###  3.2. Góc hỏi đáp & Cộng đồng (Q&A Section)
-*  Đặt câu hỏi: Người dùng đăng các thắc mắc về kỹ năng chăm sóc, dinh dưỡng hoặc y tế cho thú cưng.
-*  Chia sẻ kinh nghiệm: Cộng đồng tham gia trả lời, tư vấn và chia sẻ mẹo nuôi dạy.
+
   
