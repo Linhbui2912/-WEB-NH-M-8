@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
-
+require_once __DIR__ . '/../models/homepage_helpers.php'; 
+$activeNav = 'search'; $assetPrefix = '../'; 
 /**
  * @var string $keyword
  * @var list<array<string,mixed>> $results
@@ -23,36 +24,12 @@ $NO_AVATAR = $projectUrl . '/assets/icon/user.png';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PawConnect – Tìm kiếm</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?= h($projectUrl) ?>/assets/css/styles.css" />
+   <link rel="stylesheet" href="<?= hp_h($assetPrefix) ?>assets/css/homepage.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+      body { background: #efefef; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
 
-        .left-sidebar {
-            position: fixed; top: 0; left: 0;
-            width: 72px; height: 100vh;
-            background: #fff; border-right: 1px solid #efefef;
-            display: flex; flex-direction: column;
-            align-items: center; padding: 20px 0; z-index: 1000;
-        }
-        .sidebar-logo { display: block; margin-bottom: 20px; }
-        .sidebar-logo img { width: 42px; height: 42px; object-fit: contain; }
-
-        .sidebar-nav {
-            display: flex; flex-direction: column;
-            align-items: center; gap: 8px;
-            flex: 1; justify-content: center;
-        }
-        .nav-icon {
-            display: flex; align-items: center; justify-content: center;
-            width: 44px; height: 44px; border-radius: 50%;
-            transition: background .15s; text-decoration: none;
-        }
-        .nav-icon img { width: 26px; height: 26px; object-fit: contain; display: block; }
-        .nav-icon:hover { background: #f5f5f5; }
-        .nav-icon.active { background: #262626; }
-        .nav-icon.active img { filter: invert(1); }
-
+       
         .settings-icon {
             display: flex; align-items: center; justify-content: center;
             width: 44px; height: 44px; border-radius: 50%;
@@ -64,7 +41,7 @@ $NO_AVATAR = $projectUrl . '/assets/icon/user.png';
 
         .search-main {
             margin-left: 72px; width: 380px;
-            min-height: 100vh; border-right: 1px solid #efefef;
+             min-height: 100vh; border-right: 1px solid #ffff;
             padding: 16px;
         }
 
@@ -80,7 +57,7 @@ $NO_AVATAR = $projectUrl . '/assets/icon/user.png';
 
         .search-bar-inner {
             flex: 1; display: flex; align-items: center;
-            background: #efefef; border-radius: 24px;
+           background: #ffff; border-radius: 24px;
             padding: 0 14px; gap: 8px;
         }
         .search-bar-inner input {
@@ -116,31 +93,7 @@ $NO_AVATAR = $projectUrl . '/assets/icon/user.png';
 <body data-viewer-id="<?= h((string)($viewerId ?? '')) ?>" data-is-own-profile="1" data-api-base="<?= h($projectUrl) ?>/controllers/">
 
 <!-- Sidebar -->
-<aside class="left-sidebar">
-    <a class="sidebar-logo" href="<?= $url('views/homepage.php') ?>">
-        <img src="<?= $icon('PawsConnect.png') ?>" alt="PawConnect" />
-    </a>
-    <nav class="sidebar-nav">
-        <a href="<?= $url('views/homepage.php') ?>" class="nav-icon" title="Home">
-            <img src="<?= $icon('home_5973558.png') ?>" alt="Home" />
-        </a>
-        <a href="<?= $url('controllers/SearchController.php') ?>" class="nav-icon active" title="Search">
-            <img src="<?= $icon('search.png') ?>" alt="Search" />
-        </a>
-        <a href="<?= $url('controllers/dc_discover_controller.php') ?>" class="nav-icon" title="Discover">
-            <img src="<?= $icon('discovery_12028921.png') ?>" alt="Discover" />
-        </a>
-        <a href="<?= $url('views/create-post.php') ?>" class="nav-icon" title="Create">
-            <img src="<?= $icon('add.png') ?>" alt="Create" />
-        </a>
-        <a href="<?= $url('views/profile.php') ?>" class="nav-icon" title="Profile">
-            <img src="<?= $icon('user.png') ?>" alt="Profile" />
-        </a>
-    </nav>
-    <button type="button" id="btnOpenSettings" class="settings-icon" title="Settings">
-        <img src="<?= $icon('setting.png') ?>" alt="Settings" />
-    </button>
-</aside>
+<?php require __DIR__ . '/partials/homepage/sidebar.php'; ?>
 
 <!-- Search panel -->
 <div class="search-main">
